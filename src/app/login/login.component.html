@@ -1,0 +1,34 @@
+<section class="loginsection"> 
+  <div class="row">
+  <div class="col"></div>
+  <div class="col-3 mt-5 ">
+    <div class="container">
+      <h2 class="login">Login Page</h2>
+      <div class="card" style="width: 18rem">
+        <img src="../../assets/card img 3.jpg" class="card-img-top" alt="image" height="200px" />
+        <div class="card-body">
+          <h5 class="card-title">Enter Username</h5>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              [(ngModel)]="loginname"
+            />
+            <label for="floatingInput">Username</label>
+          </div>
+          <p class="card-text">
+            Note:User validation are processed here,Unauthorized access are
+            disabled
+          </p>
+            <button class="btn btn-primary" (click)="verify()">LogIn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col"></div>
+</div>
+</section>
+ 
+

@@ -1,0 +1,12 @@
+.login{
+    font-family: 'Black Ops One', system-ui;
+    color: rgb(244, 244, 249);
+}
+.card-text{
+    font-family: 'Black Ops One', system-ui;
+    font-family: 'Titillium Web', sans-serif;
+}
+.loginsection{
+    background-image: url(/assets/card\ img.jpg);
+    height: 100vh;
+}
