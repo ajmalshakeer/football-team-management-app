@@ -1,0 +1,241 @@
+<div class="row m-0">
+  <div class="col-2">
+    <app-sidenav></app-sidenav>
+  </div>
+
+  <div class="col main-content">
+    <!-- Top navbar -->
+    <nav
+      class="navbar navbar-tp navbar-expand-md navbar-dark bg-primary topnav sticky-top"
+      id="navbar-main"
+    >
+      <div class="container-fluid">
+        <div class="d=flex topnav">
+          <ul class="navbar-nav  ">
+            <li class="nav-item">
+              <a
+                [routerLink]="['/homepage']"
+                class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
+                >Perfomance Tab</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/homepage']"
+                class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
+                >Player Stats</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link dropdown-toggle"
+                role="button" data-bs-toggle="dropdown"
+                >Titles</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">UCL</a></li>
+                  <li><a class="dropdown-item" href="#">La Liga</a></li>
+                  <li><a class="dropdown-item" href="#">Fa Cup</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/homepage']"
+                class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
+                >Top Rating</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- Form -->
+        <form
+          class="navbar-search navbar-search-dark form-inline mr-1 d-none d-md-flex ml-lg-auto"
+        >
+          <div class="form-group mb-0">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="bi bi-search searchicon"></i>
+                </span>
+              </div>
+              <input
+                class="form-control searchinputtag ps-0"
+                placeholder="Search for Players..."
+                type="text"
+                (keyup)="search()"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container-fluid text-center maindiv">
+      <div class="col">
+        <!-- input Modal -->
+
+        <!-- <form class="mb-4"> -->
+        <div class="d-flex justify-content-end mx-2 mb-4 mt-3">
+          <div class="">
+            <button
+              class="btn newplayeraddbutton"
+              data-bs-toggle="modal"
+              data-bs-target="#addPlayerModal"
+            >
+              <i class="bi bi-plus-lg"></i>ENROLL NEW PLAYER
+            </button>
+          </div>
+
+          <form [formGroup]="playerForm">
+            <!-- add new player Modal -->
+            <div
+              class="modal fade"
+              id="addPlayerModal"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+              tabindex="-1"
+              role="dialog"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title addPlayerModaltitle">
+                      Add New Player
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+
+                  <div class="modal-body addPlayerModalbody">
+                    <div class="mb-2 d-flex flex-column gap-1">
+                      <label for="playerimage" class="playerdetailsmodallabel"
+                        >Player ImageUrl</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="playerimage"
+                        placeholder="place player profile url here...."
+                        formControlName="playerImage"
+                      />
+                    </div>
+                    <div class="mb-2 d-flex flex-column gap-1">
+                      <label for="playerName" class="playerdetailsmodallabel"
+                        >Player Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="playerName"
+                        placeholder="Enter player name"
+                        formControlName="playerName"
+                      />
+                    </div>
+                    <div
+                      class="modalrequireddiv"
+                      *ngIf="!playerForm.value.playerName && isSubmittedClicked"
+                    >
+                      Player name is required.
+                    </div>
+
+                    <div class="mb-2 d-flex flex-column gap-1">
+                      <label for="playerRating" class="playerdetailsmodallabel"
+                        >Player Rating</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="playerRating"
+                        placeholder="Enter player rating"
+                        formControlName="rating"
+                      />
+                    </div>
+                    <div
+                      class="modalrequireddiv"
+                      *ngIf="!playerForm.value.rating && isSubmittedClicked"
+                    >
+                      Player rating is required.
+                    </div>
+
+                    <div class="mb-2 d-flex flex-column gap-1">
+                      <label
+                        for="playerPosition"
+                        class="playerdetailsmodallabel"
+                        >Player Position</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="playerPosition"
+                        placeholder="Enter player position"
+                        formControlName="position"
+                      />
+                    </div>
+                    <div
+                      class="modalrequireddiv"
+                      *ngIf="!playerForm.value.position && isSubmittedClicked"
+                    >
+                      Player position is required.
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      #modalcanclebutton
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                      (click)="closebutton()"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      (click)="onSubmit()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- </form> -->
+      </div>
+
+      <div class="row playerscardsrow">
+        <div class="col-3" *ngFor="let cardDetail of playercard">
+          <div class="card mx-2 mb-4 playercard">
+            <img
+              src="{{ cardDetail.imageSrc }}"
+              class="card-img-top cardimg"
+              alt="Card image"
+            />
+            <div class="card-body">
+              <h5 class="card-title mb-0 mt-0">{{ cardDetail.playerName }}</h5>
+              <p class="card-text mb-0 playerposition">
+                {{ cardDetail.position }}
+              </p>
+              <h3 class="rating mb-0 mb-3">
+                {{ cardDetail.rating }}
+                <i class="bi bi-star-fill mt-3"></i>
+              </h3>
+              <button class="btn btn-outline-primary cardeditbutton">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              <button class="btn btn-outline-danger carddeletebutton">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

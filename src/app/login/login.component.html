@@ -1,28 +1,124 @@
-<section class="loginsection"> 
+
+<div class="page-header header-filter loginpage">
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="card card-login pb-4">
+          <form class="form" method="" action="">
+            <div class="card-header card-header-primary text-center">
+              <h4 class="card-title">Login with</h4>
+
+
+              <div class="social-line">
+               <a href="https://www.google.com" class="btn btn-just-icon btn-link">
+                <i class="bi bi-google"></i>
+                </a>
+                <a href="#" class="btn btn-just-icon btn-link">
+                  <i class="bi bi-envelope-fill"></i>
+                </a>
+                <a href="#" class="btn btn-just-icon btn-link">
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </div>
+
+
+            </div>
+            <p class="description text-center">Or</p>
+            <div class="card-body">
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">person</i>
+                  </span>
+                </div>
+                <input type="text" class="form-control" id="floatingInput" placeholder="Username..." [(ngModel)]="loginname" name="loginname"> 
+              </div>
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                </div>
+                <input type="password" class="form-control" id="floatingInput" placeholder="Password..." [(ngModel)]="password" name="password"> 
+              </div>
+            </div>
+
+
+            <div class="footer text-center">
+              <button  class="btn btn-primary mx-3 loginbutton" (click)="verify()">LogIn</button>
+              <p>{{authenticationfail_message}}</p>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="loginsection"> 
   <div class="row">
   <div class="col"></div>
-  <div class="col-3 mt-5 ">
+  <div class="col-3 mt-2">
     <div class="container">
       <h2 class="login">Login Page</h2>
-      <div class="card" style="width: 18rem">
+      <div class="card logincard" style="width: 18rem">
         <img src="../../assets/card img 3.jpg" class="card-img-top" alt="image" height="200px" />
         <div class="card-body">
+         
           <h5 class="card-title">Enter Username</h5>
-          <div class="form-floating mb-3">
-            <input
+          <div class="form-floating mb-3" >
+            <input 
               type="text"
               class="form-control"
               id="floatingInput"
               placeholder=""
               [(ngModel)]="loginname"
+             
             />
             <label for="floatingInput">Username</label>
           </div>
-          <p class="card-text">
-            Note:User validation are processed here,Unauthorized access are
-            disabled....
-          </p>
-            <button class="btn btn-primary" (click)="verify()">LogIn</button>
+
+
+
+          <div class="form-floating mb-3" >
+            <input 
+              type="password"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              [(ngModel)]="password"
+             
+            />
+            <label for="floatingInput">password</label>
+          </div>
+
+          
+            <button  class="btn btn-primary mx-3" (click)="verify()" >Admin LogIn</button>
+            <button  class="btn btn-primary">User LogIn</button>
+
+            <p>{{authenticationfail_message}}</p>
+          
         </div>
       </div>
     </div>
@@ -30,5 +126,5 @@
   <div class="col"></div>
 </div>
 </section>
- 
+  -->
 

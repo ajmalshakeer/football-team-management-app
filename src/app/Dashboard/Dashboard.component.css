@@ -1,0 +1,15 @@
+.winchartpointer{
+    width: .8rem;
+    height: .8rem;
+    background-color: #07fa13;
+}
+.drawchartpointer{
+    width: .8rem;
+    height: .8rem;
+    background-color: #c6cdc7;
+}
+.losechartpointer{
+    width: .8rem;
+    height: .8rem;
+    background-color: #ea0101;
+}

@@ -1,59 +1,89 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit,AfterViewInit {
+  @ViewChild('inputName') inputBox!: ElementRef;
   index: number = 0;
+  deletemodalindex:number=0;
   title = 'User Record';
-  btnview: boolean = true;
+  isShowAddOrUpdateButton = true;
   name: String = '';
   arr: String[] = [];
-constructor(){}
+
+
+   constructor()
+   {
+
+   }
+
+
+  /* Load data from local storage upon initialization */
   ngOnInit() {
-    // Load data from local storage upon initialization
-    const storedData = localStorage.getItem('userRecords');
-    if (storedData) {
-      this.arr = JSON.parse(storedData);
-    }
+    const STORED_DATA = localStorage.getItem('userRecords');
+
+    if (STORED_DATA) {
+      this.arr = JSON.parse(STORED_DATA);      
+     }
   }
 
-  add() {
-    if (this.name != '') {
+
+  ngAfterViewInit(): void {
+    this.inputBox.nativeElement.focus();
+  }
+
+  addingRecord() {
+    if (this.name = this.name.replace(/\s+$/, '').trim()) {
       this.arr.push(this.name);
       this.saveDataToLocalStorage();
       this.name = '';
+      this.inputBox.nativeElement.focus();
     } else {
-      alert('enter a name');
+      alert('No values entered,please enter some values');
+      this.inputBox.nativeElement.focus();
+      this.name = '';
     }
   }
-  delete(i: number) {
-    this.arr.splice(i, 1);
-    this.saveDataToLocalStorage();
-    this.name='';
-    this.btnview=true
-  }
-  edit(i: number) {
+
+  editingRecord(i: number) {
     this.name = this.arr[i];
-
-    this.btnview = false;
+    this.isShowAddOrUpdateButton = false;
     this.index = i;
+    this.inputBox.nativeElement.focus();
   }
 
-  update() {
-    this.btnview = true;
+  updatingRecord() {
+    this.isShowAddOrUpdateButton = true;
+    this.name = this.name.replace(/\s+$/, '').trim()
     this.arr[this.index] = this.name;
     this.saveDataToLocalStorage();
     this.name = '';
+    this.inputBox.nativeElement.focus();
   }
 
+  /* Save data to local storage */
   private saveDataToLocalStorage() {
-    // Save data to local storage
     localStorage.setItem('userRecords', JSON.stringify(this.arr));
   }
 
- 
+  deletingRecord(deleteindex: number) {
+      this.deletemodalindex=deleteindex;
+      this.name = '';
+      this.isShowAddOrUpdateButton = true;
+      this.inputBox.nativeElement.focus();
+  }
+
+  deletemodal(){
+    this.arr.splice(this.deletemodalindex, 1);
+    this.saveDataToLocalStorage();
+  }
+
+
 }
+
+
+
