@@ -1,89 +1,79 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit,AfterViewInit {
+export class HomepageComponent implements OnInit, AfterViewInit {
   @ViewChild('inputName') inputBox!: ElementRef;
-  index: number = 0;
-  deletemodalindex:number=0;
-  title = 'User Record';
+
+  index = 0;
+  deleteModalIndex: number = 0;
+  title = 'Admin Record';
   isShowAddOrUpdateButton = true;
-  name: String = '';
-  arr: String[] = [];
+  AdminName: String = '';
+  LocalStorageArray: String[] = [];
 
-
-   constructor()
-   {
-
-   }
-
-
-  /* Load data from local storage upon initialization */
   ngOnInit() {
     const STORED_DATA = localStorage.getItem('userRecords');
-
     if (STORED_DATA) {
-      this.arr = JSON.parse(STORED_DATA);      
-     }
+      this.LocalStorageArray = JSON.parse(STORED_DATA);
+    }
   }
-
 
   ngAfterViewInit(): void {
     this.inputBox.nativeElement.focus();
   }
 
-  addingRecord() {
-    if (this.name = this.name.replace(/\s+$/, '').trim()) {
-      this.arr.push(this.name);
+  addNewAdmin() {
+    if ((this.AdminName = this.AdminName.replace(/\s+$/, '').trim())) {
+      this.LocalStorageArray.push(this.AdminName);
       this.saveDataToLocalStorage();
-      this.name = '';
+      this.AdminName = '';
       this.inputBox.nativeElement.focus();
     } else {
       alert('No values entered,please enter some values');
       this.inputBox.nativeElement.focus();
-      this.name = '';
+      this.AdminName = '';
     }
   }
 
-  editingRecord(i: number) {
-    this.name = this.arr[i];
+  editAdmin(i: number) {
+    this.AdminName = this.LocalStorageArray[i];
     this.isShowAddOrUpdateButton = false;
     this.index = i;
     this.inputBox.nativeElement.focus();
   }
 
-  updatingRecord() {
+  updateAdmin() {
     this.isShowAddOrUpdateButton = true;
-    this.name = this.name.replace(/\s+$/, '').trim()
-    this.arr[this.index] = this.name;
+    this.AdminName = this.AdminName.replace(/\s+$/, '').trim();
+    this.LocalStorageArray[this.index] = this.AdminName;
     this.saveDataToLocalStorage();
-    this.name = '';
+    this.AdminName = '';
     this.inputBox.nativeElement.focus();
   }
 
-  /* Save data to local storage */
   private saveDataToLocalStorage() {
-    localStorage.setItem('userRecords', JSON.stringify(this.arr));
+    localStorage.setItem('userRecords', JSON.stringify(this.LocalStorageArray));
   }
 
-  deletingRecord(deleteindex: number) {
-      this.deletemodalindex=deleteindex;
-      this.name = '';
-      this.isShowAddOrUpdateButton = true;
-      this.inputBox.nativeElement.focus();
+  deleteAdmin(deleteindex: number) {
+    this.deleteModalIndex = deleteindex;
+    this.AdminName = '';
+    this.isShowAddOrUpdateButton = true;
+    this.inputBox.nativeElement.focus();
   }
 
-  deletemodal(){
-    this.arr.splice(this.deletemodalindex, 1);
+  deletemodal() {
+    this.LocalStorageArray.splice(this.deleteModalIndex, 1);
     this.saveDataToLocalStorage();
   }
-
-
 }
-
-
-

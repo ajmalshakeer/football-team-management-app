@@ -31,6 +31,7 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
               
             ]
           },
@@ -69,6 +70,7 @@
             },
             "development": {
               "browserTarget": "task1impl:build:development"
+
             }
           },
           "defaultConfiguration": "development"
@@ -95,7 +97,9 @@
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           }
         }
       }

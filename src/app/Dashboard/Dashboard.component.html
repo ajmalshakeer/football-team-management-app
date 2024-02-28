@@ -3,28 +3,254 @@
     <app-sidenav></app-sidenav>
   </div>
 
-  <div class="col mainbody d-flex align-items-center ms-3">
-    <div style="width: 20rem;">
-      <canvas id="polarChart" width="20" height="20"></canvas>
-    </div>
-      <div class="d-flex flex-column gap-2">
-        <div class="d-flex align-items-center gap-2">
-          <div class="winchartpointer"></div>
-          <label for="">Matches Won</label>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <div class="drawchartpointer"></div>
-          <label for="">Draw Matches</label>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <div class="losechartpointer"></div>
-          <label for="">Matches Lose</label>
+  <div class="col-10">
+    <h2 class="ms-2 mt-3" style="color: #37003c">Welcome to Dashboard</h2>
+
+    <section class="d-flex gap-2">
+      <div class="slideshow">
+        <div
+          id="carouselExampleAutoplaying"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="3000">
+              <div class="card ms-4 mt-5 matchschedulecard">
+                <div
+                  class="d-flex justify-content-between matchschedulecardtop mx-3 mt-2"
+                >
+                  <p>NextGame</p>
+                  <p>View Calender</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <p>UEFA Champions Leauge |</p>
+                  <p>Thu,7 Mar,1:30 am</p>
+                </div>
+                <div
+                  class="matchfixturediv d-flex justify-content-between align-items-center"
+                >
+                  <div class="d-flex flex-column align-items-center">
+                    <img
+                      src="../../assets/madrid_logo.png"
+                      alt=""
+                      class="matchschedulecardimage1"
+                    />
+                    <h6>Real Madrid</h6>
+                  </div>
+                  <p class="me-4">VS</p>
+                  <div class="d-flex flex-column align-items-center me-3">
+                    <img
+                      src="../../assets/images/RB_Leipzig.svg"
+                      alt=""
+                      class="matchschedulecardimage2"
+                    />
+                    <h6>RB leipzig</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="3000">
+              <div class="card ms-4 mt-5 matchschedulecard">
+                <div
+                  class="d-flex justify-content-between matchschedulecardtop mx-3 mt-2"
+                >
+                  <p>NextGame</p>
+                  <p>View Calender</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <p>El-Classico |</p>
+                  <p>Sun,21 Apr,8:45 pm</p>
+                </div>
+                <div
+                  class="matchfixturediv d-flex justify-content-between align-items-center"
+                >
+                  <div class="d-flex flex-column align-items-center">
+                    <img
+                      src="../../assets/madrid_logo.png"
+                      alt=""
+                      class="matchschedulecardimage1"
+                    />
+                    <h6>Real Madrid</h6>
+                  </div>
+                  <p class="me-4">VS</p>
+                  <div class="d-flex flex-column align-items-center me-3">
+                    <img
+                      src="../../assets/images/barcalogo.png"
+                      alt=""
+                      class="matchschedulecardimage3 me-2 mt-2"
+                    />
+                    <h6>FC Barcelona</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="3000">
+              <div class="card ms-4 mt-5 matchschedulecard">
+                <div
+                  class="d-flex justify-content-between matchschedulecardtop mx-3 mt-2"
+                >
+                  <p>NextGame</p>
+                  <p>View Calender</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <p>UEFA Champions Leauge |</p>
+                  <p>Fri,28 Apr,1:30 am</p>
+                </div>
+                <div
+                  class="matchfixturediv d-flex justify-content-between align-items-center"
+                >
+                  <div class="d-flex flex-column align-items-center">
+                    <img
+                      src="../../assets/images/city logo.png"
+                      alt=""
+                      class="matchschedulecardimage1"
+                    />
+                    <h6>Manchester City</h6>
+                  </div>
+                  <p class="me-4">VS</p>
+                  <div class="d-flex flex-column align-items-center me-3">
+                    <img
+                      src="../../assets/madrid_logo.png"
+                      alt=""
+                      class="matchschedulecardimage1"
+                    />
+                    <h6>Real Madrid</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-        
 
-  </div>
-  <div class="col">
+      <div class="card mt-5 gamestatisticcard">
+        <div class="d-flex align-items-center mt-4">
+          <div style="width: 10rem">
+            <canvas id="polarChart" width="10" height="10"></canvas>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <div class="winchartpointer"></div>
+              <label for="">Matches Won</label>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="drawchartpointer"></div>
+              <label for="">Draw Matches</label>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="losechartpointer"></div>
+              <label for="">Matches Lose</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section>
+      <div class="mb-4 d-flex  justify-content-between align-items-center">
+        <div class="tablediv ms-4 mt-5">
+          <h4 class="tableheading ms-3 my-2">UEFA Standings</h4>
+          <table class="table table-striped table-hover pointstable ms-3">
+            <thead>
+              <tr>
+                <th>Team Name</th>
+                <th>Matches Played</th>
+                <th>Matches Won</th>
+                <th>Matches Lost</th>
+                <th>Matches Drawn</th>
+                <th>Goal Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Real Madrid</td>
+                <td>10</td>
+                <td>7</td>
+                <td>2</td>
+                <td>1</td>
+                <td>+8</td>
+              </tr>
+              <tr>
+                <td>Braga</td>
+                <td>10</td>
+                <td>5</td>
+                <td>3</td>
+                <td>2</td>
+                <td>+2</td>
+              </tr>
+              <tr>
+                <td>Union Berlin</td>
+                <td>10</td>
+                <td>5</td>
+                <td>3</td>
+                <td>2</td>
+                <td>-1</td>
+              </tr>
+              <tr>
+                <td>Napoli</td>
+                <td>10</td>
+                <td>5</td>
+                <td>3</td>
+                <td>2</td>
+                <td>-6</td>
+              </tr>
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ms-4">
+          <div class="card teamdetails mt-5 p-3">
+            <div class="d-flex gap-2">
+              <div
+                class="currencyicon d-flex justify-content-center align-items-center"
+              >
+                <i class="bi bi-postage iconstyle"></i>
+              </div>
+              <p>Posession</p>
+            </div>
+            <p class="teamdetailcardvalues">65%</p>
+          </div>
+
+          <div class="card teamdetails mt-3 p-3">
+            <div class="d-flex gap-2">
+              <div
+                class="currencyicon d-flex justify-content-center align-items-center"
+              >
+                <i class="bi bi-currency-dollar iconstyle"></i>
+              </div>
+              <p>Overall Price</p>
+            </div>
+            <p class="teamdetailcardvalues">$305m</p>
+          </div>
+        </div>
+
+        <div class="me-5">
+          <div class="card teamdetails mt-5 p-3">
+            <div class="d-flex gap-2">
+              <div
+                class="currencyicon d-flex justify-content-center align-items-center"
+              >
+                <i class="bi bi-star-half iconstyle"></i>
+              </div>
+              <p>Average Score</p>
+            </div>
+            <p class="teamdetailcardvalues">7.5</p>
+          </div>
+
+          <div class="card teamdetails mt-3 p-3">
+            <div class="d-flex gap-2">
+              <div
+                class="currencyicon d-flex justify-content-center align-items-center"
+              >
+                <i class="bi bi-cash-coin iconstyle"></i>
+              </div>
+              <p>Transfer Budjet</p>
+            </div>
+            <p class="teamdetailcardvalues">$201m</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

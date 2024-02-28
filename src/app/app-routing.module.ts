@@ -8,17 +8,17 @@ import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { Player_dataComponent } from './Player_data/Player_data.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
-  {path:'login',component:LoginComponent},
-  {path:'homepage',component:HomepageComponent},
-  {path:'Player_card',component:Player_cardComponent},
-  {path:'popularity_table',component:Popularity_tableComponent},
-  {path:'Dashboard',component:DashboardComponent},
-  {path:'Player_data',component:Player_dataComponent}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'homepage', component: HomepageComponent },
+  { path: 'Player_card', component: Player_cardComponent },
+  { path: 'popularity_table', component: Popularity_tableComponent },
+  { path: 'Dashboard', component: DashboardComponent },
+  { path: 'Player_data', component: Player_dataComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

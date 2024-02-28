@@ -1,0 +1,26 @@
+.matchschedulecard{
+    background-color: #dae6f2;
+    width:20rem;
+    height: 12rem;
+    box-shadow: #dae6f2;
+    border-color: black;
+    color: #37003c;
+    font-weight: bold;
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+ }
+
+    .matchschedulecardimage1{
+        width:9rem;
+        height: 5rem;
+        
+    }
+    .matchschedulecardimage2{
+        width:7rem;
+        height: 5rem; 
+       
+    }
+    .slideshow{
+        width: 400px;
+        height: 150px;
+    }

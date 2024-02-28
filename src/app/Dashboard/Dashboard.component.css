@@ -13,3 +13,98 @@
     height: .8rem;
     background-color: #ea0101;
 }
+
+.matchschedulecard{
+    background-color: #dae6f2;
+    width:20rem;
+    height: 12rem;
+    box-shadow: #dae6f2;
+    border-color: black;
+    color: #37003c;
+    font-weight: bold;
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+.slideshow{
+    width: 400px;
+    height: 150px;
+}
+
+.gamestatisticcard{
+    background-color: #dae6f2;
+    width:30rem;
+    height: 12rem;
+    box-shadow: #dae6f2;
+    border-color: black;
+    color: #37003c;
+    font-weight: bold;
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); 
+    
+}
+
+.matchschedulecardimage1{
+    width:9rem;
+    height: 5rem;
+    
+}
+.matchschedulecardimage2{
+    width:7rem;
+    height: 5rem; 
+   
+}
+.matchschedulecardimage3{
+    width:5rem;
+    height: 5rem;
+}
+
+.pointstable{
+    width: 50px;
+    border-collapse: collapse;
+    border-radius: 14px; 
+    overflow: hidden; 
+    border-collapse: collapse;
+    border: 2px solid #000007;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9); 
+    color: #37003c;
+   
+}
+.tableheading{
+    font-weight: bold;
+    color: #37003c;
+}
+.tablediv{
+    background-color: #dae6f2;
+    width:420px;
+    border-radius: 14px;
+    height: 230px;
+    
+    
+}
+.teamdetails{
+    background-color: #dae6f2;
+    width: 215px;
+    height: 110px;
+    border-radius: 14px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    
+}
+.currencyicon{
+    width: 40px;
+    height: 35px;
+    background-color: #37003c;
+    /* margin-left: 12px;
+    margin-top: 18px; */
+    border-radius: 7px;
+}
+.iconstyle{
+    color: white;
+    font-size:  x-large;
+    align-items: center;
+}
+.teamdetailcardvalues{
+    text-align: center;
+    font-size: x-large;
+    margin-top: 8px;
+}

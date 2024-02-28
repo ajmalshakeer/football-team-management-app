@@ -13,6 +13,7 @@ import { Popularity_tableComponent } from './popularity_table/popularity_table.c
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { Player_dataComponent } from './Player_data/Player_data.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [						
@@ -30,7 +31,8 @@ import { Player_dataComponent } from './Player_data/Player_data.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,ReactiveFormsModule
+    MatIconModule,ReactiveFormsModule,
+    HttpClientModule
     
   ],
   providers: [],
