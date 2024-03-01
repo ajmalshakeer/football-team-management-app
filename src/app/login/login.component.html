@@ -35,7 +35,7 @@
                   class="form-control"
                   id="floatingInput"
                   placeholder="Username..."
-                  [(ngModel)]="loginName"
+                  [(ngModel)]="loginUserName"
                   name="loginname"
                 />
               </div>
@@ -55,16 +55,18 @@
                   name="password"
                 />
               </div>
+              <div class="d-flex justify-content-end ">
+                <a class="forgotpassworddiv" [routerLink]="['/forgotpassword']">Forgot Password?</a>
+              </div>
             </div>
 
             <div class="footer text-center">
               <button
                 class="btn btn-primary mx-3 loginbutton"
-                (click)="verify()"
+                (click)="verifyAdmin()"
               >
                 LogIn
               </button>
-              <p>{{ authenticationfail_message }}</p>
             </div>
           </form>
         </div>

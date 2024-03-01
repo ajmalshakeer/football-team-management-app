@@ -1,39 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  AdminArray: String[] = [];
-  loginName: String = '';
-  password: any = '';
-  authenticationfail_message: string = '';
+    AdminNameStoredArray: String[] = [];
+    loginUserName  = '';
+    password: any = '';
+    
 
-  constructor(private router: Router) {}
+    constructor(private router: Router, private toastr: ToastrService) { }
 
-  ngOnInit() {
-    this.adminRecord();
-  }
-
-  verify() {
-    if (this.AdminArray.find((user) => user === this.loginName)) {
-      if (this.password == 'password') {
-        this.router.navigate(['/Dashboard']);
-      } else {
-        this.authenticationfail_message = 'password incorrect';
-      }
-    } else {
-      this.authenticationfail_message = 'Oops User not found!';
+    ngOnInit() {
+        this.adminRecord();
     }
-  }
 
-  adminRecord() {
-    const STORED_DATA = localStorage.getItem('userRecords');
-    if (STORED_DATA) {
-      this.AdminArray = JSON.parse(STORED_DATA);
+    verifyAdmin() {
+        if (this.checkIfUserExists()) {
+            if (this.password == "asdfghjkl;'") {
+                this.router.navigate(['/Dashboard']);
+                this.toastr.success("Successfully logged in");
+            } else {
+                this.toastr.error("Password Incorrect");
+            }
+        } else {
+            this.toastr.error('Oops user not Found!')
+        }
     }
-  }
+
+    checkIfUserExists(): boolean {
+        return !!this.AdminNameStoredArray.find((user) => user === this.loginUserName);
+    }
+
+    adminRecord() {
+        const storedAdminData = localStorage.getItem('userRecords');
+        this.AdminNameStoredArray = storedAdminData ? JSON.parse(storedAdminData) : [];
+    }
 }

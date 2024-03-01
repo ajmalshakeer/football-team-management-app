@@ -6,6 +6,7 @@ import { Player_cardComponent } from './Player_card/Player_card.component';
 import { Popularity_tableComponent } from './popularity_table/popularity_table.component';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { Player_dataComponent } from './Player_data/Player_data.component';
+import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'popularity_table', component: Popularity_tableComponent },
   { path: 'Dashboard', component: DashboardComponent },
   { path: 'Player_data', component: Player_dataComponent },
+  {path : 'forgotpassword', component:ForgotPasswordComponent}
 ];
 
 @NgModule({

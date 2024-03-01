@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-homepage',
@@ -21,11 +22,10 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   AdminName: String = '';
   LocalStorageArray: String[] = [];
 
+  constructor(private toastr: ToastrService){ }
+
   ngOnInit() {
-    const STORED_DATA = localStorage.getItem('userRecords');
-    if (STORED_DATA) {
-      this.LocalStorageArray = JSON.parse(STORED_DATA);
-    }
+    this.displayLocalStorageArray();
   }
 
   ngAfterViewInit(): void {
@@ -33,13 +33,14 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
   addNewAdmin() {
-    if ((this.AdminName = this.AdminName.replace(/\s+$/, '').trim())) {
+    if (this.filteredAdminName()) {
       this.LocalStorageArray.push(this.AdminName);
       this.saveDataToLocalStorage();
       this.AdminName = '';
       this.inputBox.nativeElement.focus();
-    } else {
-      alert('No values entered,please enter some values');
+    } 
+    else {
+      this.toastr.warning('No values entered,please enter some values');
       this.inputBox.nativeElement.focus();
       this.AdminName = '';
     }
@@ -75,5 +76,12 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   deletemodal() {
     this.LocalStorageArray.splice(this.deleteModalIndex, 1);
     this.saveDataToLocalStorage();
+  }
+  displayLocalStorageArray(){
+    const storedAdminData = localStorage.getItem('userRecords');
+    this.LocalStorageArray= storedAdminData ? JSON.parse(storedAdminData) : [];
+  }
+  filteredAdminName() : String{
+    return this.AdminName = this.AdminName.replace(/\s+$/, '').trim()
   }
 }

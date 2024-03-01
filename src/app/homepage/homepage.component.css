@@ -14,54 +14,18 @@
     padding-top: 5px;
 }
 
-.navbar{
-  background-color: #5e72e4;
-  color: #fff;
-}
-
-.sidenav {
-  background-color: #f8f9fa; /* Set sidebar background color */
-  height: 100vh; /* Set sidebar height to full height of viewport */
-  position: relative;
-  
-  justify-content: space-evenly;
-}
-
-.nav-link {
-  color: #333; /* Set link text color */
-}
-
-.nav-link:hover {
-  background-color: #e9ecef; /* Set background color on hover */
-}
-
-.nav-link.active {
-  font-weight: bold; /* Set font weight for active link */
-}
-.topnav{
-  height: 70px;
-}
-  .logoutbutton{
-    border-radius: 25px;
-  }
-  .logoutbutton:hover{
-    color: #f8f4f4; /* Change text color on hover */
-    box-shadow: 0 0 10px 0px rgb(228, 67, 67);
-    border-radius: 30px ;
-    background: rgb(245, 6, 6);
-    transition: 0.5s ;
-  }
   
  .homepagesection{
   /* background-image: url(../../assets/homepagebg.jpg); */
-  background-color: #fcf7f7;
+  background-color: #ffffff;
   height:100vh;
   background-size: cover; 
   background-position:top center;
   
  }
  
- .recordtable{
+ .Admintable{
+  width: 80%;
   height: 60vh;
   overflow-y: auto;
  }

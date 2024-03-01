@@ -4,6 +4,13 @@
   </div>
 
   <div class="col main-content">
+    <div
+      class="loaderDiv d-flex justify-content-center align-items-center"
+      *ngIf="loader"
+    >
+      <span class="loader"></span>
+    </div>
+
     <!-- Top navbar -->
     <nav
       class="navbar navbar-tp navbar-expand-md navbar-dark bg-primary topnav sticky-top"
@@ -63,7 +70,7 @@
                 class="form-control searchinputtag ps-0"
                 placeholder="Search for Players..."
                 type="text"
-                (keyup)="search()"
+                (keyup)="searchSepcificCard()"
               />
             </div>
           </div>
@@ -110,7 +117,7 @@
                       class="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                      (click)="formreset()"
+                      (click)="resetForm()"
                     ></button>
                   </div>
 
@@ -225,17 +232,17 @@
                   </div>
                   <div class="modal-footer">
                     <button
-                      #modalcanclebutton
+                      #modalCancleButton
                       type="button"
-                      class="btn btn-outline-secondary"
+                      class="btn btn-secondary"
                       data-bs-dismiss="modal"
-                      (click)="formreset()"
+                      (click)="resetForm()"
                     >
                       Close
                     </button>
                     <button
                       type="submit"
-                      class="btn btn-outline-primary"
+                      class="btn btn-primary"
                       (click)="addPlayer()"
                     >
                       Save
@@ -249,7 +256,7 @@
       </div>
 
       <div class="row playerscardsrow">
-        <div class="col-3" *ngFor="let cardDetail of playercard">
+        <div class="col-3" *ngFor="let cardDetail of playerCard">
           <div class="card mx-2 mb-4 playercard">
             <img
               src="{{ cardDetail.playerimage }}"
@@ -271,7 +278,7 @@
                 title="Edit"
                 data-bs-toggle="modal"
                 data-bs-target="#updatePlayerModal"
-                (click)="updatePlayerFetch(cardDetail.playerid)"
+                (click)="fetchUpdatePlayerIndex(cardDetail.playerid)"
               >
                 <i class="bi bi-pencil-fill"></i>
               </button>
@@ -281,7 +288,7 @@
                 title="Delete"
                 data-bs-toggle="modal"
                 data-bs-target="#cardDeleteConformationmodal"
-                (click)="deletePlayerIndexFetch(cardDetail.playerid)"
+                (click)="fetchDeletePlayerIndex(cardDetail.playerid)"
               >
                 <i class="bi bi-trash3-fill"></i>
               </button>
@@ -309,14 +316,14 @@
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-outline-secondary"
+                  class="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Cancle
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-danger"
+                  class="btn btn-danger"
                   data-bs-dismiss="modal"
                   (click)="deletePlayer(deleteplayerIndex)"
                 >
@@ -351,7 +358,7 @@
                   class="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
-                  (click)="formreset()"
+                  (click)="resetForm()"
                 ></button>
               </div>
 
@@ -456,16 +463,16 @@
                 <button
                   #updateCancleButton
                   type="button"
-                  class="btn btn-outline-secondary"
+                  class="btn btn-secondary"
                   data-bs-dismiss="modal"
-                  (click)="formreset()"
+                  (click)="resetForm()"
                 >
                   Close
                 </button>
                 <button
                   type="submit"
-                  class="btn btn-outline-success"
-                  (click)="updateplayer()"
+                  class="btn btn-success"
+                  (click)="updatePlayer()"
                 >
                   update
                 </button>

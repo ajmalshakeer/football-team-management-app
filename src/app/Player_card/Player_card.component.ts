@@ -1,125 +1,118 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlayerService } from '../Service/player.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-Player_card',
-  templateUrl: './Player_card.component.html',
-  styleUrls: ['./Player_card.component.css'],
+    selector: 'app-Player_card',
+    templateUrl: './Player_card.component.html',
+    styleUrls: ['./Player_card.component.css'],
 })
 export class Player_cardComponent implements OnInit {
-  playerForm!: FormGroup;
+    playerForm!: FormGroup;
 
-  @ViewChild('inputName') inputBox!: ElementRef;
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('modalcanclebutton') modalcanclebutton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('updateCancleButton') updateCancleButton!: ElementRef<HTMLButtonElement>;
+    @ViewChild('inputName') inputBox!: ElementRef;
+    @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+    @ViewChild('modalCancleButton') modalCancleButton!: ElementRef<HTMLButtonElement>;
+    @ViewChild('updateCancleButton') updateCancleButton!: ElementRef<HTMLButtonElement>;
 
-  playercard: any[] = [];
-  index: number = 0;
-  title = 'User Record';
-  name: String = '';
-  Seracharray: String[] = [];
-  filteredArr: String[] = [];
-  isSubmittedClicked = false;
-  deleteplayerIndex: number = 0;
-  updateplayerindex: number = 0;
+    playerCard: any[] = [];
+    SearchArray: String[] = [];
+    FilteredArray: String[] = [];
+    isSubmittedClicked = false;
+    deleteplayerIndex: number = 0;
+    updatePlayerIndex: number = 0;
+    loader=false;
 
-  constructor(private fb: FormBuilder, private service: PlayerService) {}
+    constructor(private formBuilder: FormBuilder, private service: PlayerService, private toastr: ToastrService) { }
 
-  ngOnInit() {
-    this.getplayer();
-    this.formvalidation();
-  }
-
-  getplayer() {
-    this.service.getplayer().subscribe((carddata) => {
-      this.playercard = carddata;
-    });
-  }
-
-  addPlayer() {
-    this.isSubmittedClicked = true;
-    if (this.playerForm.valid) {
-      this.isImageDefinedorNot();
-    } else {
-      console.log('form error');
+    ngOnInit() {
+        this.getPlayer();
+        this.validateForm();
     }
-  }
 
-  isImageDefinedorNot() {
-    if (this.playerForm.value.playerimage) {
-      this.imageDefined();
-    } else {
-      this.playerForm.value.playerimage = '/assets/default _image.jpg';
-      this.addPlayer();
-    }
-  }
-
-  imageDefined() {
-    this.service.addPlayer(this.playerForm.value).subscribe(
-      (Response) => {
-        alert(`New player ${Response.playername} was added`);
-        this.playerForm.reset();
-        this.isSubmittedClicked = false;
-        (this.modalcanclebutton.nativeElement as HTMLButtonElement).click();
-        this.getplayer();
-      },
-      (error) => {
-        console.error('error in adding player', error);
-      }
-    );
-  }
-  deletePlayerIndexFetch(playerid: number) {
-    this.deleteplayerIndex = playerid;
-  }
-
-  deletePlayer(deleteplayerIndex: number) {
-    this.service.deleteplayer(deleteplayerIndex).subscribe(() => {
-      this.getplayer();
-    });
-  }
-
-  updatePlayerFetch(playerid: number) {
-    this.updateplayerindex = playerid;
-    this.service
-      .getplayerbyid(this.updateplayerindex)
-      .subscribe((playerdata) => {
-        this.playerForm.patchValue(playerdata);
-      });
-  }
-
-  updateplayer(){
-    if (this.playerForm.valid) {
-      this.service
-        .updateplayer(this.updateplayerindex, this.playerForm.value)
-        .subscribe(() => {
-          this.playerForm.reset();
-          this.isSubmittedClicked=false;
-          (this.updateCancleButton.nativeElement as HTMLButtonElement).click();
-          this.getplayer();
+    getPlayer() {
+        this.loader=true;
+        this.service.getplayer().subscribe((carddata) => {
+            setTimeout(() => {
+                this.playerCard = carddata;
+                this.loader=false
+            }, 2000);    
         });
     }
-  }
 
-  search() {
-    const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
-    this.filteredArr = this.Seracharray.filter((item) =>
-      item.toLowerCase().includes(searchTerm)
-    );
-  }
+    addPlayer() {
+        this.isSubmittedClicked = true;
+        this.playerForm.valid ? this.checkIfImageDefinedOrNot() : this.toastr.error('form error');
+    }
 
-  formvalidation() {
-    this.playerForm = this.fb.group({
-      playerimage: [''],
-      playername: ['', Validators.required],
-      playerrating: ['', Validators.required],
-      playerposition: ['', Validators.required],
-      playercountry: ['', Validators.required],
-    });
-  }
+    checkIfImageDefinedOrNot() {
+        this.playerForm.value.playerimage ? this.imageDefined() : ( this.playerForm.value.playerimage = '/assets/default _image.jpg', this.addPlayer());
+    }
 
-  formreset() {
-    this.playerForm.reset();
-  }
+    imageDefined() {
+        this.service.addPlayer(this.playerForm.value).subscribe(
+            (response) => {
+                this.toastr.success(`New player ${response.playername}added Successfully`);
+                this.playerForm.reset();
+                this.isSubmittedClicked = false;
+                (this.modalCancleButton.nativeElement as HTMLButtonElement).click();
+                this.getPlayer();
+            },
+            (error) => {
+                this.toastr.error('error in adding player', error);
+            }
+        );
+    }
+
+    fetchDeletePlayerIndex(playerid: number) {
+        this.deleteplayerIndex = playerid;
+    }
+
+    deletePlayer(deleteplayerIndex: number) {
+        this.service.deleteplayer(deleteplayerIndex).subscribe(() => {
+            this.toastr.success('Deleted Succesfully')
+            this.getPlayer();
+        });
+    }
+
+    fetchUpdatePlayerIndex(playerid: number) {
+        this.updatePlayerIndex = playerid;
+        this.service.getplayerbyid(this.updatePlayerIndex).subscribe((playerdata) => {
+            this.playerForm.patchValue(playerdata);
+        });
+    }
+
+    updatePlayer() {
+        if (this.playerForm.valid) {
+            this.service.updateplayer(this.updatePlayerIndex, this.playerForm.value).subscribe(() => {
+                    this.playerForm.reset();
+                    this.isSubmittedClicked = false;
+                    (this.updateCancleButton.nativeElement as HTMLButtonElement).click();
+                    this.toastr.success('Updated successfully');
+                    this.getPlayer();
+                });
+        }
+    }
+
+    searchSepcificCard() {
+        const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
+        this.FilteredArray = this.SearchArray.filter((item) =>
+            item.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    validateForm() {
+        this.playerForm = this.formBuilder.group({
+            playerimage: [''],
+            playername: ['', Validators.required],
+            playerrating: ['', Validators.required],
+            playerposition: ['', Validators.required],
+            playercountry: ['', Validators.required],
+        });
+    }
+
+    resetForm() {
+        this.playerForm.reset();
+    }
 }

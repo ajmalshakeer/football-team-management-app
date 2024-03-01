@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +13,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { Player_dataComponent } from './Player_data/Player_data.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
 
 @NgModule({
-  declarations: [						
+  declarations: [							
     AppComponent,
     LoginComponent,
       HomepageComponent,
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
       Popularity_tableComponent,
       SidenavComponent,
       DashboardComponent,
-      Player_dataComponent
+      Player_dataComponent,
+      ForgotPasswordComponent
    ],
   imports: [
     FormsModule,
@@ -32,8 +34,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,ReactiveFormsModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true}),
   ],
   providers: [],
   bootstrap: [AppComponent]
