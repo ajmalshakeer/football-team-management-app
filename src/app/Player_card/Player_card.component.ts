@@ -22,7 +22,13 @@ export class Player_cardComponent implements OnInit {
     isSubmittedClicked = false;
     deleteplayerIndex: number = 0;
     updatePlayerIndex: number = 0;
-    loader=false;
+    loader = false;
+    currentPage: number = 1;
+    totalPages: number = 0;
+    playersPerPage: number = 12;
+    totalPlayerCount = 0;
+    paginatedPlayerCard:any[]=[];
+
 
     constructor(private formBuilder: FormBuilder, private service: PlayerService, private toastr: ToastrService) { }
 
@@ -32,12 +38,12 @@ export class Player_cardComponent implements OnInit {
     }
 
     getPlayer() {
-        this.loader=true;
+
         this.service.getplayer().subscribe((carddata) => {
-            setTimeout(() => {
-                this.playerCard = carddata;
-                this.loader=false
-            }, 2000);    
+            this.playerCard = carddata;
+            this.EmployeeCount();
+            this.totalPages = Math.ceil(this.playerCard.length / this.playersPerPage);
+            this.updatePaginatedPlayerCard();
         });
     }
 
@@ -47,7 +53,7 @@ export class Player_cardComponent implements OnInit {
     }
 
     checkIfImageDefinedOrNot() {
-        this.playerForm.value.playerimage ? this.imageDefined() : ( this.playerForm.value.playerimage = '/assets/default _image.jpg', this.addPlayer());
+        this.playerForm.value.playerimage ? this.imageDefined() : (this.playerForm.value.playerimage = '/assets/default _image.jpg', this.addPlayer());
     }
 
     imageDefined() {
@@ -86,12 +92,12 @@ export class Player_cardComponent implements OnInit {
     updatePlayer() {
         if (this.playerForm.valid) {
             this.service.updateplayer(this.updatePlayerIndex, this.playerForm.value).subscribe(() => {
-                    this.playerForm.reset();
-                    this.isSubmittedClicked = false;
-                    (this.updateCancleButton.nativeElement as HTMLButtonElement).click();
-                    this.toastr.success('Updated successfully');
-                    this.getPlayer();
-                });
+                this.playerForm.reset();
+                this.isSubmittedClicked = false;
+                (this.updateCancleButton.nativeElement as HTMLButtonElement).click();
+                this.toastr.success('Updated successfully');
+                this.getPlayer();
+            });
         }
     }
 
@@ -115,4 +121,18 @@ export class Player_cardComponent implements OnInit {
     resetForm() {
         this.playerForm.reset();
     }
+
+    EmployeeCount() {
+        this.totalPlayerCount = this.playerCard.length;
+    }
+    updatePaginatedPlayerCard() {
+        const startIndex = (this.currentPage - 1) * this.playersPerPage;
+        const endIndex = startIndex + this.playersPerPage;
+        this.paginatedPlayerCard = this.playerCard.slice(startIndex, endIndex);
+      }
+
+      onPageChange(page: number) {
+        this.currentPage = page;
+        this.updatePaginatedPlayerCard();
+      }
 }

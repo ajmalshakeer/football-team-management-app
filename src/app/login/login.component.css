@@ -4,18 +4,22 @@
      background-position:top center;
      
 }
+.authethicationerror{
+  color: red;
+  font-weight: 500;
+}
 
 .card-title{
     font-family: 'Black Ops One', system-ui;
 }
 
-.forgotpassworddiv{
+.forgotpasswordlink{
+  color: #37003c;
+  text-decoration: none;
+}
+.forgotpasswordlink:hover{
   color: #37003c;
 }
-
-
-
-  
   .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;

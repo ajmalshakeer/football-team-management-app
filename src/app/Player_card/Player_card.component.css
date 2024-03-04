@@ -1,30 +1,4 @@
-.loaderDiv{
-  width: 100%;
-  height: 100vh;
-}
-.loader {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: block;
-  color: #37003c;
-  animation: animloader 1s linear infinite alternate;
-}
 
-@keyframes animloader {
-  0% {
-    box-shadow: -38px -12px ,  -14px 0,  14px 0, 38px 0;
-  }
-  33% {
-    box-shadow: -38px 0px, -14px -12px,  14px 0, 38px 0;
-  }
-  66% {
-    box-shadow: -38px 0px , -14px 0, 14px -12px, 38px 0;
-  }
-  100% {
-    box-shadow: -38px 0 , -14px 0, 14px 0 , 38px -12px;
-  }
-}
 
 
 html {
@@ -40,6 +14,8 @@ html {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+
 
 .topnav a {
   text-decoration: none; /* Remove underline by default */
@@ -105,7 +81,45 @@ hr {
   color: #f0f1f7;
   padding: 10px 20px;
   font-weight: 500;
+  margin-left: 534px;
 }
+
+
+
+.totalplayercard{
+  background-color: #fff;
+  width: 270px;
+    height: 104px;
+  border-radius: 14px;
+  border-color: #37003c;
+  font-weight: bold;
+  color: #37003c;
+  border-width: inherit;
+  box-shadow: 0 0 10px rgba(51, 0, 60, 0.1);
+}
+.totalplayerimgdiv{
+  width: 78px;
+  height: 78px;
+  background-color: #ffffff;
+  /* margin-left: 12px;
+  margin-top: 18px; */
+  border-radius: 7px;
+}
+
+.totalplayercardvalues{
+  text-align: center;
+  font-size: x-large;
+  margin-top: 8px;
+}
+.playerCount{
+  font-size: 45px;
+}
+
+.totalplayersimg{
+  width: 166px;
+  height: 113px;
+}
+
 
 .carddeletebutton {
   margin-left: 20px;

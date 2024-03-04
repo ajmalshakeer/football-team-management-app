@@ -1,0 +1,22 @@
+
+
+  <nav class="mt-2" aria-label="Card_pagination">
+  <ul class="pagination justify-content-center gap-1">
+    <li class="page-item paginationelements paginationli" (click)="changePage(currentPage - 1)">
+      <a class="page-link" [routerLink]="['/playercard']" aria-label="firstitem">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <li class="page-item active paginationelements" *ngFor="let page of getPageArray()" [class.active]="currentPage === page">
+      <a class="page-link" [routerLink]="['/playercard']" (click)="changePage(page)">{{ page }}</a>
+    </li>
+
+
+    <li class="page-item paginationelements" (click)= "changePage(currentPage + 1)">
+      <a class="page-link"[routerLink]="['/playercard']" aria-label="lastitem">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

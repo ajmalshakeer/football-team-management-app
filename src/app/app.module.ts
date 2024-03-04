@@ -15,9 +15,10 @@ import { Player_dataComponent } from './Player_data/Player_data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
-  declarations: [							
+  declarations: [								
     AppComponent,
     LoginComponent,
       HomepageComponent,
@@ -26,7 +27,8 @@ import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.compone
       SidenavComponent,
       DashboardComponent,
       Player_dataComponent,
-      ForgotPasswordComponent
+      ForgotPasswordComponent,
+      PaginationComponent
    ],
   imports: [
     FormsModule,

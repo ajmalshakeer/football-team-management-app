@@ -4,12 +4,7 @@
   </div>
 
   <div class="col main-content">
-    <div
-      class="loaderDiv d-flex justify-content-center align-items-center"
-      *ngIf="loader"
-    >
-      <span class="loader"></span>
-    </div>
+
 
     <!-- Top navbar -->
     <nav
@@ -83,7 +78,27 @@
         <!-- input Modal -->
 
         <!-- <form class="mb-4"> -->
-        <div class="d-flex justify-content-end mx-2 mb-4 mt-3">
+        <div class="d-flex justify-content-between me-2 mb-4 mt-3">
+          <div class="card totalplayercard p-3">
+            <div class="d-flex gap-4">
+              <div
+                class="totalplayerimgdiv d-flex justify-content-center align-items-center"
+              >
+                <img
+                  src="../../assets/images/totalplayers.png"
+                  alt=""
+                  class="totalplayersimg ms-2"
+                />
+              </div>
+              <div class="d-flex flex-column">
+                <p>Total Players</p>
+                <p class="totalplayercardvalues playerCount">
+                  {{ totalPlayerCount }}
+                </p>
+              </div>
+            </div>
+           
+          </div>
           <div class="">
             <button
               class="btn newplayeraddbutton"
@@ -256,7 +271,7 @@
       </div>
 
       <div class="row playerscardsrow">
-        <div class="col-3" *ngFor="let cardDetail of playerCard">
+        <div class="col-3" *ngFor="let cardDetail of paginatedPlayerCard">
           <div class="card mx-2 mb-4 playercard">
             <img
               src="{{ cardDetail.playerimage }}"
@@ -482,5 +497,11 @@
         </div>
       </form>
     </div>
+    <app-pagination
+      [totalPages]="totalPages"
+      [currentPage]="currentPage"
+      (onPageChange)="onPageChange($event)"
+    >
+    </app-pagination>
   </div>
 </div>

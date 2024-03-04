@@ -1,3 +1,6 @@
+.dashboardheading{
+    font-weight: bold;
+}
 .winchartpointer{
     width: .8rem;
     height: .8rem;
@@ -15,15 +18,15 @@
 }
 
 .matchschedulecard{
-    background-color: #dae6f2;
+    background-color: #fafdff;
     width:20rem;
     height: 12rem;
-    box-shadow: #dae6f2;
+    box-shadow: #b7babc;
     border-color: black;
     color: #37003c;
     font-weight: bold;
     border-radius: 14px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 0 10px rgba(122, 120, 120, 0.2); 
 }
 .slideshow{
     width: 400px;
@@ -31,7 +34,7 @@
 }
 
 .gamestatisticcard{
-    background-color: #dae6f2;
+    background-color: #fafdff;
     width:30rem;
     height: 12rem;
     box-shadow: #dae6f2;
@@ -39,7 +42,7 @@
     color: #37003c;
     font-weight: bold;
     border-radius: 14px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 0 10px rgba(121, 119, 119, 0.4); 
     
 }
 
@@ -59,14 +62,15 @@
 }
 
 .pointstable{
-    width: 50px;
+    width: 440px;
     border-collapse: collapse;
     border-radius: 14px; 
     overflow: hidden; 
     border-collapse: collapse;
-    border: 2px solid #000007;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9); 
+    border: 2px solid #03030e;
+    box-shadow: 0 0 10px rgba(129, 128, 128, 0.9); 
     color: #37003c;
+    background-color: #ffffff;
    
 }
 .tableheading{
@@ -74,7 +78,7 @@
     color: #37003c;
 }
 .tablediv{
-    background-color: #dae6f2;
+    background-color: #f3f3f3;
     width:420px;
     border-radius: 14px;
     height: 230px;
@@ -82,7 +86,7 @@
     
 }
 .teamdetails{
-    background-color: #dae6f2;
+    background-color: #fafdff;
     width: 215px;
     height: 110px;
     border-radius: 14px;
@@ -107,4 +111,10 @@
     text-align: center;
     font-size: x-large;
     margin-top: 8px;
+}
+.posession{
+    font-size: xx-large;
+}
+.averagescore{
+    font-size: xx-large;
 }

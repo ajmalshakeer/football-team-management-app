@@ -55,8 +55,11 @@
                   name="password"
                 />
               </div>
+              <div class="authethicationerror d-flex justify-content-center ms-4">
+              <p>{{authenticationErrorMessage}}</p>
+            </div>
               <div class="d-flex justify-content-end ">
-                <a class="forgotpassworddiv" [routerLink]="['/forgotpassword']">Forgot Password?</a>
+                <a class="forgotpasswordlink" [routerLink]="['/forgotpassword']">Forgot Password?</a>
               </div>
             </div>
 

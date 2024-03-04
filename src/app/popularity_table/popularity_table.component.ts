@@ -14,6 +14,7 @@ Chart.register(...registerables);
 export class Popularity_tableComponent implements OnInit, OnDestroy {
   realmadrid: number = 21;
   popularityChart: any;
+  loader=false;
 
   ngOnInit() {
     this.popularity_chart();
@@ -24,6 +25,8 @@ export class Popularity_tableComponent implements OnInit, OnDestroy {
   }
 
   popularity_chart() {
+    this.loader=true;
+    setTimeout(() => {
     this.Destroychart();
     this.popularityChart = new Chart('barchart', {
       type: 'bar',
@@ -70,6 +73,9 @@ export class Popularity_tableComponent implements OnInit, OnDestroy {
         },
       },
     });
+    this.loader=false;
+  },2000);
+  
   }
 
   Destroychart() {

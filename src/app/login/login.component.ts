@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
     AdminNameStoredArray: String[] = [];
     loginUserName  = '';
     password: any = '';
+    authenticationErrorMessage='';
     
 
     constructor(private router: Router, private toastr: ToastrService) { }
@@ -25,10 +26,10 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/Dashboard']);
                 this.toastr.success("Successfully logged in");
             } else {
-                this.toastr.error("Password Incorrect");
+                this.authenticationErrorMessage='Password Incorrect';
             }
         } else {
-            this.toastr.error('Oops user not Found!')
+            this.authenticationErrorMessage='Oops user not Found!';
         }
     }
 
