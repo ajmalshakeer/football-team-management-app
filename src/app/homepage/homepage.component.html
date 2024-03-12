@@ -4,7 +4,7 @@
       <app-sidenav></app-sidenav>
     </div>
 
-    <div class="col">
+    <div class="col maindiv">
       <!-- Modal -->
       <div
         class="modal fade"
@@ -40,8 +40,8 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="deletemodal()"
                 data-bs-dismiss="modal"
+                (click)="deleteAdmin()"
               >
                 Delete Record
               </button>
@@ -50,70 +50,35 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end mt-2 me-3">
-        <button type="button" class="btn btn-outline-primary">
+      <div class="d-flex justify-content-end mt-3 me-3">
+        <button
+          class="btn addNewAdminbtn"
+          data-bs-toggle="modal"
+          data-bs-target="#addAdminModal"
+        >
           <i class="bi bi-plus-lg"></i>Add New Admin
         </button>
       </div>
 
-      <form>
-        <div class="row mt-5 mx-0">
-          <div class="col"></div>
-
-          <div class="col-sm-8 col-md-5 d-flex gap-4">
-            <input
-              #inputName
-              type="text"
-              class="form-control"
-              [(ngModel)]="AdminName"
-              placeholder="Enter Admin Name"
-              name="recordnames"
-            />
-
-            <button
-              type="submit"
-              class="btn btn-success"
-              *ngIf="isShowAddOrUpdateButton"
-              (click)="addNewAdmin()"
-            >
-              Add
-            </button>
-
-            <button
-              type="submit"
-              class="btn btn-success"
-              *ngIf="!isShowAddOrUpdateButton"
-              (click)="updateAdmin()"
-            >
-              Update
-            </button>
-          </div>
-          <div class="col"></div>
-        </div>
-      </form>
-
-      <!-- Admin table -->
+      <!-- Admin Table -->
       <div class="row m-0">
         <div class="col"></div>
 
         <div class="col-sm-8 col-md-5 Admintable my-4">
-          <table
-            class="table table-dark table-striped mt-4"
-            *ngIf="LocalStorageArray.length > 0"
-          >
+          <table class="table table-striped mt-4">
             <thead>
               <tr>
+                <th>Admin_Id</th>
                 <th>AdminName</th>
-                <th>Password</th>
                 <th>Designation</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let key of LocalStorageArray; let i = index">
-                <td>{{ key }}</td>
-                <td></td>
-                <td></td>
+              <tr *ngFor="let adminData of adminDetails">
+                <td>{{ adminData.adminId }}</td>
+                <td>{{ adminData.adminName }}</td>
+                <td>{{ adminData.designation }}</td>
                 <td>
                   <button
                     title="Edit"
@@ -123,9 +88,11 @@
                       --bs-btn-padding-x: 0.5rem;
                       --bs-btn-font-size: 0.75rem;
                     "
-                    (click)="editAdmin(i)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateAdminModal"
+                    (click)="fetchUpdateAdminId(adminData.adminId)"
                   >
-                    <i class="bi bi-pencil">edit</i>
+                    <i class="bi bi-pencil"></i>
                   </button>
 
                   <button
@@ -136,11 +103,11 @@
                       --bs-btn-padding-x: 0.5rem;
                       --bs-btn-font-size: 0.75rem;
                     "
-                    (click)="deleteAdmin(i)"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
+                    (click)="fetchAdminId(adminData.adminId)"
                   >
-                    <i class="bi bi-trash3">delete</i>
+                    <i class="bi bi-trash3"></i>
                   </button>
                 </td>
               </tr>
@@ -150,121 +117,274 @@
 
         <div class="col"></div>
       </div>
-    </div>
-  </div>
-  
-  <!-- <form [formGroup]="AdminForm">
-   
-    <div
-      class="modal fade"
-      id="adminPlayerModal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-      tabindex="-1"
-      role="dialog"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title adminPlayerModaltitle">
-              Enter Player Details
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              (click)="formreset()"
-            ></button>
-          </div>
 
-          <div class="modal-body addPlayerModalbody">
-            <div class="mb-2 d-flex flex-column gap-1">
-            <div class="d-flex gap-2">
-              <div class="mb-2">
-                <div class="mb-2 d-flex flex-column gap-1 ms-2">
-                  <label for="player_name" class="playerdetailsmodallabel"
-                    >Admin Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="playername"
-                    placeholder="Enter player name"
-                    formControlName="playername"
-                  />
-                </div>
-                <div
-                  class="modalrequireddiv"
-                  *ngIf="!playerForm.value.playername && isSubmittedClicked"
-                >
-                  Admin name is required.
-                </div>
+      <!-- add new admin form -->
+      <form [formGroup]="adminForm">
+        <div
+          class="modal fade"
+          id="addAdminModal"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title adminPlayerModaltitle">
+                  Enter Admin Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
 
-              <div class="mb-2">
+              <div class="modal-body adminPlayerModalbody">
                 <div class="mb-2 d-flex flex-column gap-1">
-                  <label for="playerrating" class="playerdetailsmodallabel"
-                    >Password</label
+                  <div class="d-flex gap-2">
+                    <div class="mb-2">
+                      <div class="mb-2 d-flex flex-column gap-1 ms-2">
+                        <label for="admin_name" class="playerdetailsmodallabel"
+                          >Admin Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="adminname"
+                          placeholder="Enter Admin name"
+                          formControlName="adminName"
+                        />
+                      </div>
+                      <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminName && isSubmittedClicked"
+                      >
+                        Admin name is required.
+                      </div>
+                    </div>
+
+                    <div class="mb-2">
+                      <div class="mb-2 d-flex flex-column gap-1">
+                        <label for="admin_code" class="playerdetailsmodallabel"
+                          >Admin code</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="Admin_code"
+                          placeholder="Enter Admin code"
+                          formControlName="adminCode"
+                        />
+                      </div>
+                      <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminCode && isSubmittedClicked"
+                      >
+                        Passowrd is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 d-flex flex-column gap-1">
+                    <label for="designation" class="playerdetailsmodallabel"
+                      >Designation</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Admin_designation"
+                      placeholder="Enter Designation"
+                      formControlName="designation"
+                    />
+                  </div>
+                  <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.designation && isSubmittedClicked"
                   >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="playerrating"
-                    placeholder="Enter player rating"
-                    formControlName="playerrating"
-                  />
+                    Designation is required.
+                  </div>
+                  <div class="mb-2 d-flex flex-column gap-1">
+                    <label for="password" class="playerdetailsmodallabel"
+                      >Password</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Admin_password"
+                      placeholder="Enter password"
+                      formControlName="password"
+                    />
+                  </div>
+                  <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.password && isSubmittedClicked"
+                  >
+                    Password is required.
+                  </div>
                 </div>
-                <div
-                  class="modalrequireddiv"
-                  *ngIf="!playerForm.value.playerrating && isSubmittedClicked"
-                >
-                  Passowrd is required.
+                <div class="modal-footer mt-3">
+                  <button
+                    type="button"
+                    #adminCancleButton
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    (click)="resetForm()"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    (click)="addAdmin()"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </div>
-
-            <div class="mb-2 d-flex flex-column gap-1">
-              <label for="player_position" class="playerdetailsmodallabel"
-                >Designation</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="playerposition"
-                placeholder="Enter player position"
-                formControlName="playerposition"
-              />
-            </div>
-            <div
-              class="modalrequireddiv"
-              *ngIf="!playerForm.value.playerposition && isSubmittedClicked"
-            >
-              Designation is required.
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              #modalcanclebutton
-              type="button"
-              class="btn btn-outline-secondary"
-              data-bs-dismiss="modal"
-              (click)="formreset()"
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              class="btn btn-outline-primary"
-              (click)="addPlayer()"
-            >
-              Save
-            </button>
           </div>
         </div>
-      </div>
+      </form>
+
+      <!-- update admin modal -->
+      <form [formGroup]="adminForm">
+        <div
+          class="modal fade"
+          id="updateAdminModal"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title adminPlayerModaltitle">
+                  Update Admin Details
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div class="modal-body adminPlayerModalbody">
+                <div class="mb-2 d-flex flex-column gap-1">
+                  <div class="d-flex gap-2">
+                    <div class="mb-2">
+                      <div class="mb-2 d-flex flex-column gap-1 ms-2">
+                        <label for="admin_name" class="playerdetailsmodallabel"
+                          >Admin Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="adminname"
+                          placeholder="Enter Admin name"
+                          formControlName="adminName"
+                        />
+                      </div>
+                      <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminName && isSubmittedClicked"
+                      >
+                        Admin name is required.
+                      </div>
+                    </div>
+
+                    <div class="mb-2">
+                      <div class="mb-2 d-flex flex-column gap-1">
+                        <label for="admin_code" class="playerdetailsmodallabel"
+                          >Admin code</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="Admin_code"
+                          placeholder="Enter Admin code"
+                          formControlName="adminCode"
+                        />
+                      </div>
+                      <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminCode && isSubmittedClicked"
+                      >
+                        Passowrd is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 d-flex flex-column gap-1">
+                    <label for="designation" class="playerdetailsmodallabel"
+                      >Designation</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Admin_designation"
+                      placeholder="Enter Designation"
+                      formControlName="designation"
+                    />
+                  </div>
+                  <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.designation && isSubmittedClicked"
+                  >
+                    Designation is required.
+                  </div>
+                  <div class="mb-2 d-flex flex-column gap-1">
+                    <label for="password" class="playerdetailsmodallabel"
+                      >Password</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Admin_password"
+                      placeholder="Enter password"
+                      formControlName="password"
+                    />
+                  </div>
+                  <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.password && isSubmittedClicked"
+                  >
+                    Password is required.
+                  </div>
+                </div>
+                <div class="modal-footer mt-3">
+                  <button
+                    type="button"
+                    #adminUpdateButton
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    (click)="resetForm()"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-success"
+                    data-bs-dismiss="modal"
+                  (click)="updateAdmin()"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </form> -->
+  </div>
 </section>

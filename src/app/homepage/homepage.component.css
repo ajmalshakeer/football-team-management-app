@@ -55,4 +55,24 @@
   height: 100vh;
  }
 
+ .addNewAdminbtn{
+    background-color: #33003c;
+    color: #fff;
+ }
+
+ .adminPlayerModaltitle {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 30px;
+    color: #37003c;
+  }
+  
+  .adminPlayerModalbody {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+    color: #37003c;
+  }
+  
+  .modalrequireddiv {
+    color: red;
+  }
  

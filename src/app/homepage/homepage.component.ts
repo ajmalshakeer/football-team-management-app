@@ -1,87 +1,101 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PlayerService } from '../Service/player.service';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit, AfterViewInit {
+export class HomepageComponent implements OnInit {
+
+  adminForm!: FormGroup;
+
   @ViewChild('inputName') inputBox!: ElementRef;
+  @ViewChild('adminCancleButton') adminCancleButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('adminUpdateButton') adminUpdateButton!: ElementRef<HTMLButtonElement>;
 
-  index = 0;
-  deleteModalIndex: number = 0;
   title = 'Admin Record';
-  isShowAddOrUpdateButton = true;
-  AdminName: String = '';
-  LocalStorageArray: String[] = [];
+  adminDetails: any[] = [];
+  isSubmittedClicked = false;
+  deleteAdminIndex = 0;
+  updateAdminIndex = 0;
 
-  constructor(private toastr: ToastrService){ }
+  constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private service: PlayerService) { }
 
   ngOnInit() {
-    this.displayLocalStorageArray();
+    this.getAdmin();
+    this.validateForm();
   }
 
-  ngAfterViewInit(): void {
-    this.inputBox.nativeElement.focus();
+  getAdmin() {
+    this.service.getAdmin().subscribe((adminRecords) => {
+      this.adminDetails = adminRecords;
+    })
   }
 
-  addNewAdmin() {
-    if (this.filteredAdminName()) {
-      this.LocalStorageArray.push(this.AdminName);
-      this.saveDataToLocalStorage();
-      this.AdminName = '';
-      this.inputBox.nativeElement.focus();
-    } 
-    else {
-      this.toastr.warning('No values entered,please enter some values');
-      this.inputBox.nativeElement.focus();
-      this.AdminName = '';
+  addAdmin() {
+    this.isSubmittedClicked = true;
+    if (this.adminForm.valid) {
+      this.service.addAdmin(this.adminForm.value).subscribe((response) => {
+        this.toastr.success(`New Admin ${response.adminName}  added Successfully`);
+        this.resetForm();
+        this.isSubmittedClicked = false;
+        (this.adminCancleButton.nativeElement as HTMLButtonElement).click()
+        this.getAdmin();
+
+      })
     }
   }
 
-  editAdmin(i: number) {
-    this.AdminName = this.LocalStorageArray[i];
-    this.isShowAddOrUpdateButton = false;
-    this.index = i;
-    this.inputBox.nativeElement.focus();
+  fetchAdminId(adminId: number) {
+    this.deleteAdminIndex = adminId;
+  }
+
+  deleteAdmin() {
+    this.service.deleteAdmin(this.deleteAdminIndex).subscribe(() => {
+      this.toastr.success("Deleted Succesfully");
+      this.getAdmin();
+    })
+  }
+
+  fetchUpdateAdminId(updateAdminId: number) {
+    this.updateAdminIndex = updateAdminId;
+    this.service.getAdminById(this.updateAdminIndex).subscribe((admindata) => {
+      this.adminForm.patchValue(admindata);
+    });
   }
 
   updateAdmin() {
-    this.isShowAddOrUpdateButton = true;
-    this.AdminName = this.AdminName.replace(/\s+$/, '').trim();
-    this.LocalStorageArray[this.index] = this.AdminName;
-    this.saveDataToLocalStorage();
-    this.AdminName = '';
-    this.inputBox.nativeElement.focus();
+    if (this.adminForm.valid) {
+      this.service.updateAdmin(this.updateAdminIndex, this.adminForm.value).subscribe(() => {
+        this.resetForm();
+        this.isSubmittedClicked = false;
+        (this.adminUpdateButton.nativeElement as HTMLButtonElement).click();
+        this.toastr.success("updated Succesfully");
+        this.getAdmin();
+      })
+    }
   }
 
-  private saveDataToLocalStorage() {
-    localStorage.setItem('userRecords', JSON.stringify(this.LocalStorageArray));
+
+  validateForm() {
+    this.adminForm = this.formBuilder.group({
+      adminCode: ['', Validators.required],
+      adminName: ['', Validators.required],
+      designation: ['', Validators.required],
+      password: ['', Validators.required],
+    })
   }
 
-  deleteAdmin(deleteindex: number) {
-    this.deleteModalIndex = deleteindex;
-    this.AdminName = '';
-    this.isShowAddOrUpdateButton = true;
-    this.inputBox.nativeElement.focus();
-  }
 
-  deletemodal() {
-    this.LocalStorageArray.splice(this.deleteModalIndex, 1);
-    this.saveDataToLocalStorage();
-  }
-  displayLocalStorageArray(){
-    const storedAdminData = localStorage.getItem('userRecords');
-    this.LocalStorageArray= storedAdminData ? JSON.parse(storedAdminData) : [];
-  }
-  filteredAdminName() : String{
-    return this.AdminName = this.AdminName.replace(/\s+$/, '').trim()
+  resetForm() {
+    this.adminForm.reset();
   }
 }

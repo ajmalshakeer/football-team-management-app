@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { PlayerService } from '../Service/player.service';
 
 @Component({
     selector: 'app-login',
@@ -9,36 +10,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
     AdminNameStoredArray: String[] = [];
-    loginUserName  = '';
+    loginUserName = '';
     password: any = '';
-    authenticationErrorMessage='';
+    authenticationErrorMessage = '';
+
+
+    constructor(private router: Router, private toastr: ToastrService, private service: PlayerService) { }
+
+    ngOnInit() {   }
     
-
-    constructor(private router: Router, private toastr: ToastrService) { }
-
-    ngOnInit() {
-        this.adminRecord();
-    }
-
     verifyAdmin() {
-        if (this.checkIfUserExists()) {
-            if (this.password == "asdfghjkl;'") {
+        this.service.verifyAdmin(this.loginUserName, this.password).subscribe((response) => {
+            if (response.message === "user found") {
+                this.toastr.success(response.message);
                 this.router.navigate(['/Dashboard']);
-                this.toastr.success("Successfully logged in");
-            } else {
-                this.authenticationErrorMessage='Password Incorrect';
             }
-        } else {
-            this.authenticationErrorMessage='Oops user not Found!';
-        }
-    }
-
-    checkIfUserExists(): boolean {
-        return !!this.AdminNameStoredArray.find((user) => user === this.loginUserName);
-    }
-
-    adminRecord() {
-        const storedAdminData = localStorage.getItem('userRecords');
-        this.AdminNameStoredArray = storedAdminData ? JSON.parse(storedAdminData) : [];
+            else {
+                this.authenticationErrorMessage = response.message;
+            }
+        });
     }
 }

@@ -1,22 +1,48 @@
+<nav class="mt-2" aria-label="Card_pagination">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center gap-5 mb-5 mt-3 paginationdiv">
+      <div>
+        <button class="page-item paginationelementsbtn" (click)="goToFirstPage()">
+          <i class="bi bi-chevron-double-left"></i>
+        </button>
+      </div>
+      <div>
+        <button
+          class="page-item paginationelementsbtn"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+          [routerLink]="['/playercard']"
+        >
+        <i class="bi bi-chevron-bar-left"></i>
+        </button>
+      </div>
 
-
-  <nav class="mt-2" aria-label="Card_pagination">
-  <ul class="pagination justify-content-center gap-1">
-    <li class="page-item paginationelements paginationli" (click)="changePage(currentPage - 1)">
-      <a class="page-link" [routerLink]="['/playercard']" aria-label="firstitem">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-
-    <li class="page-item active paginationelements" *ngFor="let page of getPageArray()" [class.active]="currentPage === page">
-      <a class="page-link" [routerLink]="['/playercard']" (click)="changePage(page)">{{ page }}</a>
-    </li>
-
-
-    <li class="page-item paginationelements" (click)= "changePage(currentPage + 1)">
-      <a class="page-link"[routerLink]="['/playercard']" aria-label="lastitem">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
+      <div class="d-flex gap-1">
+        <button
+          class="page-item  paginationelementsbtn"
+          *ngFor="let pageNumber of getPageArray(); let index = index"
+          [class.active] = "currentPage === (index + 1)"
+          (click)="changePage(index + 1)"
+          [routerLink]="['/playercard']"
+        >
+          {{ pageNumber }}
+        </button>
+      </div>
+      <div>
+        <button
+          class="page-item paginationelementsbtn"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+          [routerLink]="['/playercard']"
+        >
+        <i class="bi bi-chevron-bar-right"></i>
+        </button>
+      </div>
+      <div>
+        <button class="page-item paginationelementsbtn" (click)="goToLastPage()">
+          <i class="bi bi-chevron-double-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </nav>

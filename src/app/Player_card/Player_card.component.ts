@@ -20,12 +20,12 @@ export class Player_cardComponent implements OnInit {
     SearchArray: String[] = [];
     FilteredArray: String[] = [];
     isSubmittedClicked = false;
-    deleteplayerIndex: number = 0;
-    updatePlayerIndex: number = 0;
+    deleteplayerIndex = 0;
+    updatePlayerIndex = 0;
     loader = false;
-    currentPage: number = 1;
-    totalPages: number = 0;
-    playersPerPage: number = 12;
+    currentPage = 1;
+    totalPages = 0;
+    playersPerPage= 12;
     totalPlayerCount = 0;
     paginatedPlayerCard:any[]=[];
 
@@ -59,7 +59,7 @@ export class Player_cardComponent implements OnInit {
     imageDefined() {
         this.service.addPlayer(this.playerForm.value).subscribe(
             (response) => {
-                this.toastr.success(`New player ${response.playername}added Successfully`);
+                this.toastr.success(`New player ${response.playername}  added Successfully`);
                 this.playerForm.reset();
                 this.isSubmittedClicked = false;
                 (this.modalCancleButton.nativeElement as HTMLButtonElement).click();

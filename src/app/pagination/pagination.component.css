@@ -1,8 +1,32 @@
-.paginationelements{
+.paginationdiv{
+    width: 633px;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
     border-radius: 50px;
-    background-color: #33003c;
+    padding: 13px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    border-color: #33003c;
 }
-.paginationli{
+
+.page-item.active {
+    background-color:#33003c;
+    color: #fff;
+    
+  }
+  .page-item.active:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+.paginationelementsbtn{
+    border-radius: 20px;
+    background-color: #fff;
     color: #33003c;
-    background-color: #33003c;
+    width: 45px;
+    height: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    font-weight:500;
+}
+.paginationelementsbtn:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
