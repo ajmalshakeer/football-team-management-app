@@ -25,9 +25,10 @@
  }
  
  .Admintable{
-  width: 80%;
+  width: 100%;
   height: 60vh;
   overflow-y: auto;
+  color: #33003c;
  }
 
  .deletemodalcontent{
