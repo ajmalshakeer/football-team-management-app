@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-Dashboard',
@@ -9,6 +10,10 @@ import { Chart } from 'chart.js';
 export class DashboardComponent implements OnInit, OnDestroy {
   chartRef: any;
   DashboardChart: any;
+
+  constructor(private toastr:ToastrService){
+
+  }
 
   ngOnInit() {
     this.winningRatioChart();
@@ -67,5 +72,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.DashboardChart) {
       this.DashboardChart.destroy();
     }
+  }
+
+  showAdminProfile(){
+this.toastr.success("test");
   }
 }

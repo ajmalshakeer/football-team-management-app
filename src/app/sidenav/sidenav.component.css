@@ -12,8 +12,8 @@
   .navlogodiv{
     margin-bottom:26px ;
   }hr {
-    border-width: 3px; /* Adjust this value to increase or decrease the thickness */
-    border-style:inset; /* Ensure that the border style is solid */
+    border-width: 3px; 
+    border-style:inset;
   }
   
   .nav-item {
@@ -23,10 +23,10 @@
   }
 
   .nav-item a {
-    color: #ffffff; /* Text color */
-    text-decoration: none; /* Remove underline from links */
-    display: flex; /* Align items horizontally */
-    align-items: center; /* Center items vertically */
+    color: #ffffff;
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
     padding-bottom: 1px;
     padding-top: 3px;
     padding-left: 10px;
@@ -35,21 +35,21 @@
   }
   
   .nav-item a:hover {
-    color: #000000; /* Change text color on hover */
+    color: #000000; 
     box-shadow: 0 0 10px 0px rgb(62, 60, 60);
     border-radius: 50px ;
     background: rgb(255, 254, 255);
     transition: 0.5s ;
   }
-   /* Icon styling */
+
    .nav-item i {
-    margin-right: 10px; /* Add space between icon and text */
-    font-size: 20px; /* Adjust icon size */
+    margin-right: 10px; 
+    font-size: 20px; 
   }
   
-  /* Text styling */
+
   .nav-item span {
-    font-size: 16px; /* Adjust text size */
+    font-size: 16px; 
   }
 
   .navbar-vertical {

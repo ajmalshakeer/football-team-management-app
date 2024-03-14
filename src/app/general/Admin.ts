@@ -1,7 +1,7 @@
 export interface Admin {
     adminId:number;
     adminCode:number;
-    adminname:String;
+    adminName:String;
     password:String;
     designation:String;
 }

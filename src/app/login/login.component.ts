@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
         this.service.verifyAdmin(this.loginUserName, this.password).subscribe((response) => {
             if (response.message === "Successfully loggedIn") {
                 this.toastr.success(response.message);
-                localStorage.setItem('adminName', this.loginUserName);
                 this.router.navigate(['/Dashboard']);
             }
             else {

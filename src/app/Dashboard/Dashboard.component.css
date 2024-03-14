@@ -1,6 +1,46 @@
 .dashboardheading{
     font-weight: bold;
 }
+
+.adminprofilecard{
+    background-color: #fafdff;
+    color: #37003c;
+    width: 120px;
+    height: 32px;
+}
+
+.profilepic{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.profilepicicon{
+    font-size: x-large;
+}
+
+.adminProfileCardName{
+    font-size: large;
+    font-weight: 300;
+    margin-right: 23px;
+    margin-top: 5px;
+}
+.adminProfileModaltitle {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 30px;
+    color: #37003c;
+  }
+  
+  .adminProfileModalbody {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+    color: #37003c;
+  }
+  
+  .modalrequireddiv {
+    color: red;
+  }
+
 .winchartpointer{
     width: .8rem;
     height: .8rem;

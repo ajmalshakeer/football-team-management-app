@@ -4,7 +4,28 @@
   </div>
 
   <div class="col-10">
-    <h2 class="ms-5 mt-3 dashboardheading" style="color: #37003c">Welcome to Dashboard</h2>
+    <div class="d-flex justify-content-between pt-2 pe-3 ps-3">
+      <div>
+        <h2 class="dashboardheading" style="color: #37003c">
+          Welcome to Dashboard
+        </h2>
+      </div>
+
+      <div
+        class="card adminprofilecard d-flex flex-row justify-content-between pb-2 ps-2 pe-2"
+        data-bs-toggle="modal"
+        data-bs-target="#AdminDetailsModal"
+      >
+        <div
+          class="profilepic d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-person-fill profilepicicon"></i>
+        </div>
+        <div class="adminProfileCardName">
+          <p>ajmal</p>
+        </div>
+      </div>
+    </div>
 
     <section class="d-flex gap-2">
       <div class="slideshow">
@@ -147,7 +168,7 @@
     </section>
 
     <section>
-      <div class="mb-4 d-flex  justify-content-between align-items-center">
+      <div class="mb-4 d-flex justify-content-between align-items-center">
         <div class="tablediv ms-4 mt-5">
           <h4 class="tableheading ms-3 my-2">UEFA Standings</h4>
           <table class="table table-striped table-hover pointstable ms-3">
@@ -194,7 +215,6 @@
                 <td>2</td>
                 <td>-6</td>
               </tr>
-              <!-- Add more rows as needed -->
             </tbody>
           </table>
         </div>
@@ -252,5 +272,139 @@
         </div>
       </div>
     </section>
+
+    <div
+      class="modal fade"
+      id="AdminDetailsModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title adminProfileModaltitle">Admin Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body adminProfileModalbody">
+            <div class="mb-2 d-flex flex-column gap-1">
+              <div class="d-flex flex-column gap-2">
+                <div class="">
+                  <div class=" d-flex flex-row gap-1">
+                    <label for="admin_name" class="playerdetailsmodallabel"
+                      >Admin Name : </label
+                    >
+                    <div>
+                      <p>ajmal</p>
+                    </div>
+                    <!-- <input
+                      type="text"
+                      class="form-control"
+                      id="adminname"
+                      placeholder="Enter Admin name"
+                      formControlName="adminName"
+                    /> -->
+                  </div>
+                  <!-- <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminName && isSubmittedClicked"
+                      >
+                        Admin name is required.
+                      </div> -->
+                </div>
+
+                <div class="">
+                  <div class=" d-flex  gap-1">
+                    <label for="admin_code" class="playerdetailsmodallabel"
+                      >Admin ID :</label
+                    >
+                    <div>
+                      <p>12</p>
+                    </div>
+                    <!-- <input
+                      type="number"
+                      class="form-control"
+                      id="Admin_code"
+                      placeholder="Enter Admin code"
+                      formControlName="adminId"
+                    /> -->
+                  </div>
+                  <!-- <div
+                        class="modalrequireddiv"
+                        *ngIf="!adminForm.value.adminCode && isSubmittedClicked"
+                      >
+                        Passowrd is required.
+                      </div> -->
+                </div>
+              </div>
+
+              <div class=" d-flex  gap-1">
+                <label for="designation" class="playerdetailsmodallabel"
+                  >Designation :</label
+                >
+                <div>
+                  <p>Technical head</p>
+                </div>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  id="Admin_designation"
+                  placeholder="Enter Designation"
+                  formControlName="designation"
+                /> -->
+              </div>
+              <!-- <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.designation && isSubmittedClicked"
+                  >
+                    Designation is required.
+                  </div> -->
+              <div class=" d-flex  gap-1">
+                <label for="password" class="playerdetailsmodallabel"
+                  >LogIn Time :</label
+                >
+                <div>
+                  <p>
+                    GMT + 5:30  DD/MM/YYYY
+                  </p>
+                </div>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  id="Admin_password"
+                  placeholder="Enter password"
+                  formControlName="password"
+                /> -->
+              </div>
+              <!-- <div
+                    class="modalrequireddiv"
+                    *ngIf="!adminForm.value.password && isSubmittedClicked"
+                  >
+                    Password is required.
+                  </div> -->
+            </div>
+            <div class="modal-footer mt-3">
+              <button
+                type="button"
+                #adminUpdateButton
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
