@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
+import { PlayerService } from '../Service/player.service';
 
 @Component({
   selector: 'app-Dashboard',
@@ -10,17 +11,31 @@ import { ToastrService } from 'ngx-toastr';
 export class DashboardComponent implements OnInit, OnDestroy {
   chartRef: any;
   DashboardChart: any;
+  loggedInAdminName : String ='';
+  adminLoggedInTime :String ='';
 
-  constructor(private toastr:ToastrService){
+  constructor(private toastr:ToastrService,private service:PlayerService){
 
   }
 
   ngOnInit() {
     this.winningRatioChart();
+    this.fetchLastLoggedInAdmin();
   }
 
   ngOnDestroy(): void {
     this.DestroyChart();
+  }
+
+  fetchLastLoggedInAdmin(): void {
+    this.service.getLastLoggedInAdmin().subscribe(history => {
+      if (history) {
+        this.loggedInAdminName = history.adminName;
+        this.adminLoggedInTime = history.loginTime;
+      } else {
+        this.loggedInAdminName = 'No admin logged in yet';
+      }
+    });
   }
 
   winningRatioChart() {

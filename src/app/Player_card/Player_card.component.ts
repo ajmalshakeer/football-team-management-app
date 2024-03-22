@@ -17,17 +17,20 @@ export class Player_cardComponent implements OnInit {
     @ViewChild('updateCancleButton') updateCancleButton!: ElementRef<HTMLButtonElement>;
 
     playerCard: any[] = [];
-    SearchArray: String[] = [];
-    FilteredArray: String[] = [];
+    playerList: any[] = [];
+    filteredPlayerList: any[] = [];
+    searchText: String = '';
+    isSearchTextEmpty = true;
     isSubmittedClicked = false;
     deleteplayerIndex = 0;
     updatePlayerIndex = 0;
     loader = false;
     currentPage = 1;
     totalPages = 0;
-    playersPerPage= 12;
+    playersPerPage = 12;
     totalPlayerCount = 0;
-    paginatedPlayerCard:any[]=[];
+    paginatedPlayerCard: any[] = [];
+
 
 
     constructor(private formBuilder: FormBuilder, private service: PlayerService, private toastr: ToastrService) { }
@@ -38,7 +41,6 @@ export class Player_cardComponent implements OnInit {
     }
 
     getPlayer() {
-
         this.service.getplayer().subscribe((carddata) => {
             this.playerCard = carddata;
             this.EmployeeCount();
@@ -49,7 +51,7 @@ export class Player_cardComponent implements OnInit {
 
     addPlayer() {
         this.isSubmittedClicked = true;
-        this.playerForm.valid ? this.checkIfImageDefinedOrNot() : this.toastr.error('form error');
+        this.playerForm.valid ? this.checkIfImageDefinedOrNot() : this.toastr.error('Error');
     }
 
     checkIfImageDefinedOrNot() {
@@ -61,7 +63,6 @@ export class Player_cardComponent implements OnInit {
             (response) => {
                 this.toastr.success(`New player ${response.playername}  added Successfully`);
                 this.playerForm.reset();
-                this.isSubmittedClicked = false;
                 (this.modalCancleButton.nativeElement as HTMLButtonElement).click();
                 this.getPlayer();
             },
@@ -78,6 +79,7 @@ export class Player_cardComponent implements OnInit {
     deletePlayer(deleteplayerIndex: number) {
         this.service.deleteplayer(deleteplayerIndex).subscribe(() => {
             this.toastr.success('Deleted Succesfully')
+            this.searchSepcificCard();
             this.getPlayer();
         });
     }
@@ -90,23 +92,36 @@ export class Player_cardComponent implements OnInit {
     }
 
     updatePlayer() {
+        this.isSubmittedClicked = true;
         if (this.playerForm.valid) {
             this.service.updateplayer(this.updatePlayerIndex, this.playerForm.value).subscribe(() => {
-                this.playerForm.reset();
-                this.isSubmittedClicked = false;
                 (this.updateCancleButton.nativeElement as HTMLButtonElement).click();
                 this.toastr.success('Updated successfully');
+                this.formClear();
                 this.getPlayer();
             });
         }
     }
 
-    searchSepcificCard() {
-        const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
-        this.FilteredArray = this.SearchArray.filter((item) =>
-            item.toLowerCase().includes(searchTerm)
-        );
+    getPlayerList() {
+        this.service.getplayer().subscribe((data: any) => {
+            this.playerList = data;
+            this.filteredPlayerList = [...this.playerList];
+        });
     }
+
+    searchSepcificCard() {
+        this.isSearchTextEmpty = false;
+        if (this.searchText.trim() === '') {
+           this.isSearchTextEmpty = true;
+        } else {
+            this.service.getplayerbyname(this.searchText).subscribe((filteredPlayers: any) => {
+                this.filteredPlayerList = filteredPlayers;
+            });
+        }
+        
+    }
+ 
 
     validateForm() {
         this.playerForm = this.formBuilder.group({
@@ -118,10 +133,6 @@ export class Player_cardComponent implements OnInit {
         });
     }
 
-    resetForm() {
-        this.playerForm.reset();
-    }
-
     EmployeeCount() {
         this.totalPlayerCount = this.playerCard.length;
     }
@@ -129,10 +140,15 @@ export class Player_cardComponent implements OnInit {
         const startIndex = (this.currentPage - 1) * this.playersPerPage;
         const endIndex = startIndex + this.playersPerPage;
         this.paginatedPlayerCard = this.playerCard.slice(startIndex, endIndex);
-      }
+    }
 
-      onPageChange(page: number) {
+    onPageChange(page: number) {
         this.currentPage = page;
         this.updatePaginatedPlayerCard();
-      }
+    }
+
+    formClear() {
+        this.playerForm.reset();
+        this.isSubmittedClicked = false;
+    }
 }

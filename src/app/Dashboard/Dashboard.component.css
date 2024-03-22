@@ -1,12 +1,17 @@
 .dashboardheading{
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .adminprofilecard{
-    background-color: #fafdff;
+    background-color: #fff;
     color: #37003c;
-    width: 120px;
+    width: 150px;
     height: 32px;
+}
+.verticalLine{
+    height: 31px;
+    width: 1px;
+    background-color: #37003c8c;
 }
 
 .profilepic{
@@ -16,7 +21,11 @@
     height: 30px;
 }
 .profilepicicon{
-    font-size: x-large;
+    width: 30px;
+    height: 30px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
 }
 
 .adminProfileCardName{
@@ -25,6 +34,7 @@
     margin-right: 23px;
     margin-top: 5px;
 }
+
 .adminProfileModaltitle {
     font-family: "Titillium Web", sans-serif;
     font-size: 30px;
@@ -64,7 +74,7 @@
     box-shadow: #b7babc;
     border-color: black;
     color: #37003c;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 14px;
     box-shadow: 0 0 10px rgba(122, 120, 120, 0.2); 
 }
@@ -80,7 +90,7 @@
     box-shadow: #dae6f2;
     border-color: black;
     color: #37003c;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 14px;
     box-shadow: 0 0 10px rgba(121, 119, 119, 0.4); 
     
@@ -114,7 +124,7 @@
    
 }
 .tableheading{
-    font-weight: bold;
+    font-weight: 500;
     color: #37003c;
 }
 .tablediv{
@@ -130,7 +140,7 @@
     width: 215px;
     height: 110px;
     border-radius: 14px;
-    font-weight: bold;
+    font-weight: 500;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
     
 }

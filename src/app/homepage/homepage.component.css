@@ -41,14 +41,15 @@
  }
 
  .deletemodalbody{
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: bold;
+  color: #37003c;
  }
  
  .deletemodaltitle{
-  font-family: 'Black Ops One', system-ui;
+  font-family: "Titillium Web", sans-serif;
   font-size: 30px;
-  /* background-color: aliceblue; */
+  color: #37003c;
  }
 
  .sidenav{

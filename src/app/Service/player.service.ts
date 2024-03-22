@@ -8,31 +8,36 @@ import { Admin } from '../general/Admin';
   providedIn: 'root',
 })
 export class PlayerService {
-  private playerUrl = 'http://localhost:8080/team';
-  private adminUrl = 'http://localhost:8080/admin';
-  constructor(private http: HttpClient) {}
+  // private playerUrl = 'http://localhost:8080/team';
+  // private adminUrl = 'http://localhost:8080/admin';
+  // private historyUrl = 'http://localhost:8080/history';
+  constructor(private http: HttpClient) { }
 
-  
+
 
   getplayer(): Observable<any> {
-    return this.http.get(`${this.playerUrl}/allplayers`);
+    return this.http.get(`/team/allplayers`);
   }
 
   getplayerbyid(id: number): Observable<any> {
-    return this.http.get(`${this.playerUrl}/fetchplayer/${id}`);
+    return this.http.get(`/team/fetchplayer/${id}`);
+  }
+
+  getplayerbyname(name : String):Observable<any>{
+    return this.http.get(`/team/searchplayer/${name}`)
   }
 
   addPlayer(player: Player): Observable<any> {
-    return this.http.post(`${this.playerUrl}/addnewplayer`, player);
+    return this.http.post(`/team/addnewplayer`, player);
   }
 
   deleteplayer(id: number): Observable<any> {
-    return this.http.delete(`${this.playerUrl}/deleteplayer/${id}`);
+    return this.http.delete(`/team/deleteplayer/${id}`);
   }
 
   updateplayer(id: number, updatePlayerdata: Player): Observable<any> {
     return this.http.put(
-      `${this.playerUrl}/updateplayer/${id}`,
+      `/team/updateplayer/${id}`,
       updatePlayerdata
     );
   }
@@ -44,28 +49,32 @@ export class PlayerService {
 
   verifyAdmin(adminName: string, password: string): Observable<any> {
     const admin = { adminName, password };
-    return this.http.post(`${this.adminUrl}/login`, admin);
+    return this.http.post(`/admin/loginAuthentication`, admin);
   }
 
 
   getAdmin(): Observable<any> {
-    return this.http.get(`${this.adminUrl}/alladmins`);
+    return this.http.get(`/admin/alladmins`);
   }
 
   getAdminById(id: number): Observable<any> {
-    return this.http.get(`${this.adminUrl}/fetchadmin/${id}`);
+    return this.http.get(`/admin/fetchadmin/${id}`);
   }
 
-  addAdmin(admin : Admin):Observable<any>{
-  return this.http.post(`${this.adminUrl}/addnewadmin`, admin);
+  addAdmin(admin: Admin): Observable<any> {
+    return this.http.post(`/admin/addnewadmin`, admin);
   }
 
-  deleteAdmin(id : number) : Observable<any>{
-    return this.http.delete(`${this.adminUrl}/deleteadmin/${id}`);
+  deleteAdmin(id: number): Observable<any> {
+    return this.http.delete(`/admin/deleteadmin/${id}`);
   }
 
-  updateAdmin(id : number , updateAdmindata : Admin): Observable<any>{
-    return this.http.put(`${this.adminUrl}/updateadmin/${id}`, updateAdmindata);
+  updateAdmin(id: number, updateAdmindata: Admin): Observable<any> {
+    return this.http.put(`/admin/updateadmin/${id}`, updateAdmindata);
   }
-  
+
+  getLastLoggedInAdmin(): Observable<any> {
+    return this.http.get(`/history/last-logged-in-admin`);
+  }
+
 }

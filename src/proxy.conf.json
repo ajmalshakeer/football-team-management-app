@@ -1,0 +1,55 @@
+{
+    "/team/allplayers": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/team/fetchplayer": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/team/searchplayer": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/team/addnewplayer": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/team/deleteplayer": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/team/updateplayer": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/loginAuthentication": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/alladmins": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/fetchadmin": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/addnewadmin": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/deleteadmin": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/admin/updateadmin": {
+      "target": "http://localhost:8080",
+      "secure": false
+    },
+    "/history/last-logged-in-admin": {
+      "target": "http://localhost:8080",
+      "secure": false
+    }
+  }
+  

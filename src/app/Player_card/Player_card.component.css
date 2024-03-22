@@ -1,6 +1,3 @@
-
-
-
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -15,10 +12,8 @@ html {
   padding-right: 0px;
 }
 
-
-
 .topnav a {
-  text-decoration: none; /* Remove underline by default */
+  text-decoration: none;
 }
 
 .nav-links ul li:hover::after {
@@ -84,12 +79,10 @@ hr {
   margin-left: 534px;
 }
 
-
-
-.totalplayercard{
+.totalplayercard {
   background-color: #fff;
   width: 270px;
-    height: 104px;
+  height: 104px;
   border-radius: 14px;
   border-color: #37003c;
   font-weight: bold;
@@ -97,29 +90,26 @@ hr {
   border-width: inherit;
   box-shadow: 0 0 10px rgba(51, 0, 60, 0.1);
 }
-.totalplayerimgdiv{
+.totalplayerimgdiv {
   width: 78px;
   height: 78px;
   background-color: #ffffff;
-  /* margin-left: 12px;
-  margin-top: 18px; */
   border-radius: 7px;
 }
 
-.totalplayercardvalues{
+.totalplayercardvalues {
   text-align: center;
   font-size: x-large;
   margin-top: 8px;
 }
-.playerCount{
+.playerCount {
   font-size: 45px;
 }
 
-.totalplayersimg{
+.totalplayersimg {
   width: 166px;
   height: 113px;
 }
-
 
 .carddeletebutton {
   margin-left: 20px;
@@ -141,16 +131,16 @@ hr {
   color: red;
 }
 
-.deleteconfromationmodaltitle{
+.deleteconfromationmodaltitle {
   font-family: "Titillium Web", sans-serif;
-  font-weight: bold;
-  color: red;
-  font-size: x-large;
+  font-size: 30px;
+  color: #37003c;
 }
-.deleteconfromationmodalbody{
+.deleteconfromationmodalbody {
   font-family: "Titillium Web", sans-serif;
   font-weight: bold;
   font-size: large;
+  color: #37003c;
 }
 .updatePlayerModaltitle {
   font-family: "Titillium Web", sans-serif;
@@ -180,8 +170,6 @@ hr {
   border: 0;
   box-shadow: none;
 }
-
-/* -------------------------------------------------------------------------------------------------- */
 
 @media (min-width: 768px) {
   .navbar-vertical .navbar-collapse {

@@ -4,8 +4,6 @@
   </div>
 
   <div class="col main-content">
-
-
     <!-- Top navbar -->
     <nav
       class="navbar navbar-tp navbar-expand-md navbar-dark bg-primary topnav sticky-top"
@@ -15,7 +13,6 @@
         <div class="d=flex topnav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              
               <a
                 [routerLink]="['/Player_data']"
                 class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
@@ -23,7 +20,8 @@
               >
             </li>
             <li class="nav-item">
-              <a href="#"
+              <a
+                href="#"
                 class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
                 >Player Stats</a
               >
@@ -42,14 +40,15 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#"
+              <a
+                href="#"
                 class="mx-4 mb-0 text-black text-uppercase d-none d-lg-inline-block nav-link"
                 >Top Rating</a
               >
             </li>
           </ul>
         </div>
-        <!-- Form -->
+        <!-- Search Filter Form -->
         <form
           class="navbar-search navbar-search-dark form-inline mr-1 d-none d-md-flex ml-lg-auto"
         >
@@ -63,8 +62,11 @@
               <input
                 class="form-control searchinputtag ps-0"
                 placeholder="Search for Players..."
-                type="text"
-                (keyup)="searchSepcificCard()"
+                type="search"
+                [(ngModel)]="searchText"
+                name="searchText"
+                #searchInput
+                (ngModelChange)="searchSepcificCard()"
               />
             </div>
           </div>
@@ -76,7 +78,6 @@
       <div class="col">
         <!-- input Modal -->
 
-        <!-- <form class="mb-4"> -->
         <div class="d-flex justify-content-between me-2 mb-4 mt-3">
           <div class="card totalplayercard p-3">
             <div class="d-flex gap-4">
@@ -96,7 +97,6 @@
                 </p>
               </div>
             </div>
-           
           </div>
           <div class="">
             <button
@@ -131,7 +131,7 @@
                       class="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                      (click)="resetForm()"
+                      (click)="formClear()"
                     ></button>
                   </div>
 
@@ -250,7 +250,7 @@
                       type="button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
-                      (click)="resetForm()"
+                      (click)="formClear()"
                     >
                       Close
                     </button>
@@ -269,7 +269,7 @@
         </div>
       </div>
 
-      <div class="row playerscardsrow">
+      <div class="row playerscardsrow" *ngIf="isSearchTextEmpty">
         <div class="col-3" *ngFor="let cardDetail of paginatedPlayerCard">
           <div class="card mx-2 mb-4 playercard">
             <img
@@ -349,6 +349,87 @@
         </div>
       </div>
 
+      <!-- searchFilterEnabledCard -->
+      <div class="row playerscardsrow" *ngIf="!isSearchTextEmpty">
+        <div class="col-3" *ngFor="let cardDetail of filteredPlayerList">
+          <div class="card mx-2 mb-4 playercard">
+            <img
+              src="{{ cardDetail.playerimage }}"
+              class="card-img-top cardimg"
+              alt="Card image"
+            />
+            <div class="card-body">
+              <h5 class="card-title mb-0 mt-0">{{ cardDetail.playername }}</h5>
+              <p class="card-text mb-0 playerposition">
+                {{ cardDetail.playerposition }}
+              </p>
+              <p class="playercountry">{{ cardDetail.playercountry }}</p>
+              <h3 class="rating mb-0 mb-3">
+                {{ cardDetail.playerrating }}
+                <i class="bi bi-star-fill mt-3"></i>
+              </h3>
+              <button
+                class="btn btn-outline-primary cardeditbutton"
+                title="Edit"
+                data-bs-toggle="modal"
+                data-bs-target="#updatePlayerModal"
+                (click)="fetchUpdatePlayerIndex(cardDetail.playerid)"
+              >
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+
+              <button
+                class="btn btn-outline-danger carddeletebutton"
+                title="Delete"
+                data-bs-toggle="modal"
+                data-bs-target="#cardDeleteConformationmodal"
+                (click)="fetchDeletePlayerIndex(cardDetail.playerid)"
+              >
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- delete conformation modal in Serach filtered cards-->
+        <div class="modal" tabindex="-1" id="cardDeleteConformationmodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title deleteconfromationmodaltitle mt-2">
+                  Conformation!!!
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body deleteconfromationmodalbody">
+                <p>Are you Sure want to delete this card..?</p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancle
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  (click)="deletePlayer(deleteplayerIndex)"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <form [formGroup]="playerForm">
         <!-- Update player Modal -->
         <div
@@ -372,7 +453,7 @@
                   class="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
-                  (click)="resetForm()"
+                  (click)="formClear()"
                 ></button>
               </div>
 
@@ -479,7 +560,7 @@
                   type="button"
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
-                  (click)="resetForm()"
+                  (click)="formClear()"
                 >
                   Close
                 </button>

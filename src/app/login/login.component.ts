@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PlayerService } from '../Service/player.service';
+import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'app-login',
@@ -23,12 +24,12 @@ export class LoginComponent implements OnInit {
     verifyAdmin() {
         this.service.verifyAdmin(this.loginUserName, this.password).subscribe((response) => {
             if (response.message === "Successfully loggedIn") {
-                this.toastr.success(response.message);
+                this.toastr.success("Successfully logged in");
                 this.router.navigate(['/Dashboard']);
             }
-            else {
-                this.authenticationErrorMessage = response.message;
-            }
+           else{
+            this.authenticationErrorMessage = response.message;
+           }
         });
     }
 }
